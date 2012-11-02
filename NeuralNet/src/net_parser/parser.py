@@ -7,6 +7,7 @@ from xml.dom.minidom import parse
 from net_structure.node import Node, Bias
 from net_structure.layer import Layer
 from net_parser.exception import ParseException
+from net_structure.network import NeuralNetwork
 
 ROOT_NODE_NAME = 'neuralNet'
 LAYER_NODE_NAME = 'layer'
@@ -41,11 +42,10 @@ class NetParser:
         for layer in layers :
             for node in layer.nodes :
                 node.updateLinks(nodes)
-        return layers
+        return NeuralNetwork(layers)
     
     def parseLinks(self, node):
         return [(link.getAttribute(NODE_ID_ATTRUBUTE_NAME), float(link.getAttribute(LINK_WEIGHT_ATTRIBUTE_NAME)))  for link in node.getElementsByTagName(LINK_NODE_NAME)]
 
 if __name__ == "__main__":
-    for layer in NetParser('../../resources/neuralNet.xml').parse() :
-        print(layer)
+    print(NetParser('../../resources/neuralNet.xml').parse())
