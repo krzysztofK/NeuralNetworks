@@ -5,6 +5,7 @@ Created on 02-11-2012
 '''
 from net_structure.link import Link
 from net_parser.exception import ParseException
+from net_structure.activation_function import ActivationFunction
 
 class Node:
     '''
@@ -17,7 +18,7 @@ class Node:
     
     def updateLinks(self, nodes):
         try :
-            self.links = [Link(nodes[nodeId], weight) for (nodeId, weight) in self.links]
+            self.links = [Link(nodes[nodeId], weight, ActivationFunction(activation)) for (nodeId, weight, activation) in self.links]
         except :
             raise ParseException('There is no node with specified identifier')
         

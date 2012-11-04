@@ -16,7 +16,7 @@ BIAS_NODE_NAME = 'bias'
 LINK_NODE_NAME = 'link'
 NODE_ID_ATTRUBUTE_NAME = 'id'
 LINK_WEIGHT_ATTRIBUTE_NAME = 'weight'
-
+ACTIVATION_ATTRIBUTE_NAME = 'activation'
 class NetParser:
     '''
     classdocs
@@ -45,7 +45,7 @@ class NetParser:
         return NeuralNetwork(layers)
     
     def parseLinks(self, node):
-        return [(link.getAttribute(NODE_ID_ATTRUBUTE_NAME), float(link.getAttribute(LINK_WEIGHT_ATTRIBUTE_NAME)))  for link in node.getElementsByTagName(LINK_NODE_NAME)]
+        return [(link.getAttribute(NODE_ID_ATTRUBUTE_NAME), float(link.getAttribute(LINK_WEIGHT_ATTRIBUTE_NAME)), link.getAttribute(ACTIVATION_ATTRIBUTE_NAME))  for link in node.getElementsByTagName(LINK_NODE_NAME)]
 
 if __name__ == "__main__":
     print(NetParser('../../resources/neuralNet.xml').parse())

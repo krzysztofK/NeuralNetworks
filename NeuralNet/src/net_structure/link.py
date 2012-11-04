@@ -10,9 +10,10 @@ class Link:
     '''
 
 
-    def __init__(self, node, weight):
+    def __init__(self, node, weight, activationFunction):
         self.weight = weight
         self.node = node
+        self.activationFunction = activationFunction
 
     def __str__(self):
-        return '\t\t-link(' + str(self.weight) + ') to ' + self.node.nodeId + '\n'
+        return '\t\t-link ' + self.activationFunction.function + '(' + str(self.weight) + ') to ' + self.node.nodeId + '\n' 

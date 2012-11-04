@@ -6,22 +6,26 @@
 
             <link
                 id="node3"
-                weight="2.0" />
+                weight="2.0"
+                activation="log" />
 
             <link
                 id="node4"
-                weight="2.1" />
+                weight="2.1"
+                activation="log" />
         </node>
 
         <node id="node2" >
 
             <link
                 id="node3"
-                weight="3.0" />
+                weight="3.0"
+                activation="log" />
 
             <link
                 id="node4"
-                weight="0.1" />
+                weight="0.1"
+                activation="log" />
         </node>
     </layer>
 
