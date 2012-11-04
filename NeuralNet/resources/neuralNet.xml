@@ -2,38 +2,34 @@
 
     <layer>
 
-        <node id="node1" >
+        <node id="node1">
 
             <link
                 id="node3"
-                weight="2.0"
-                activation="log" />
+                weight="2.0" />
 
             <link
                 id="node4"
-                weight="2.1"
-                activation="log" />
+                weight="2.1" />
         </node>
 
-        <node id="node2" >
+        <node id="node2">
 
             <link
                 id="node3"
-                weight="3.0"
-                activation="log" />
+                weight="3.0" />
 
             <link
                 id="node4"
-                weight="0.1"
-                activation="log" />
+                weight="0.1" />
         </node>
     </layer>
 
     <layer>
 
-        <node id="node3" />
+        <node id="node3" activation="log"/>
 
-        <node id="node4" />
+        <node id="node4" activation="log"/>
     </layer>
 
 </neuralNet>

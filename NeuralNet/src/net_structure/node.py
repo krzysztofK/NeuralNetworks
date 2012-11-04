@@ -18,7 +18,7 @@ class Node:
     
     def updateLinks(self, nodes):
         try :
-            self.links = [Link(nodes[nodeId], weight, ActivationFunction(activation)) for (nodeId, weight, activation) in self.links]
+            self.links = [Link(nodes[nodeId], weight) for (nodeId, weight) in self.links]
         except :
             raise ParseException('There is no node with specified identifier')
         
@@ -30,3 +30,13 @@ class Node:
 
 class Bias(Node):
     pass
+
+
+class NeuronNode(Node) :
+    
+    def __init__(self, nodeId, links, activationFunction):
+        Node.__init__(self, nodeId, links)
+        self.activationFunction = ActivationFunction(activationFunction)        
+    
+    def __str__(self):
+        return self.activationFunction.function + '-' + Node.__str__(self)
