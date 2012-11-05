@@ -27,6 +27,15 @@ class Node:
         for link in self.links :
             result = result + str(link)
         return result
+    
+    def get_value(self):
+        return self.__value
+    
+    def set_value(self, value):
+        self.__value = value
+        
+    def add_to_current_value(self, value_to_add):
+        self.__value += value_to_add
 
 class Bias(Node):
     pass

@@ -14,3 +14,6 @@ class NeuralNetwork :
         for layer in self.layers :
             result = result + str(layer)
         return result
+    
+    def calculte_answer(self, input_vector):
+        pass
