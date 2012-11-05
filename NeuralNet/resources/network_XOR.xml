@@ -1,0 +1,74 @@
+<neuralNet>
+
+    <layer>
+
+        <node id="node1" >
+
+            <link
+                id="node3"
+                weight="4.54" />
+
+            <link
+                id="node4"
+                weight="-6.11" />
+        </node>
+
+        <node id="node2" >
+
+            <link
+                id="node3"
+                weight="4.54" />
+
+            <link
+                id="node4"
+                weight="-6.11" />
+        </node>
+
+        <bias>
+
+            <link
+                id="node3"
+                weight="-7.06" />
+
+            <link
+                id="node4"
+                weight="2.37" />
+        </bias>
+    </layer>
+
+    <layer>
+
+        <node
+            id="node3"
+            activation="sigmoid" >
+
+            <link
+                id="node5"
+                weight="-9.32" />
+        </node>
+
+        <node
+            id="node4"
+            activation="sigmoid" >
+
+            <link
+                id="node5"
+                weight="-9.1" />
+        </node>
+
+        <bias>
+
+            <link
+                id="node5"
+                weight="4.54" />
+        </bias>
+    </layer>
+
+    <layer>
+
+        <node
+            id="node5"
+            activation="sigmoid" />
+    </layer>
+
+</neuralNet>

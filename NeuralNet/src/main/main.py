@@ -10,7 +10,7 @@ from net_structure.link import Link
 from net_structure.network import NeuralNetwork
 
 if __name__ == '__main__':
-    network = NetParser('../../resources/neuralNet.xml').parse()
+    network = NetParser('../../resources/network_XOR.xml').parse()
     input_vector = InputVectorParser('../../resources/inputVector.xml').parse()
     print(network.calculte_answer(input_vector))
     
