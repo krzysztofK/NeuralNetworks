@@ -1,0 +1,16 @@
+<neuralNet>
+	<layer>
+		<node id="node1">
+			<link id="node3" weight="0.17" />
+		</node>
+		<node id="node2">
+			<link id="node3" weight="0.13" />
+		</node>
+		<bias>
+			<link id="node3" weight="-0.18" />
+		</bias>
+	</layer>
+	<layer>
+		<node id="node3" activation="threshold" />
+	</layer>
+</neuralNet>
