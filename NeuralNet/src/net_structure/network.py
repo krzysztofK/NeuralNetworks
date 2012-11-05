@@ -15,5 +15,18 @@ class NeuralNetwork :
             result = result + str(layer)
         return result
     
+    def clear_values(self):
+        for layer in self.layers:
+            layer.clear_values()
+    
     def calculte_answer(self, input_vector):
-        pass
+        self.clear_values()
+        self.layers[0].copy_values_from_input_vector(input_vector)
+        for layer in self.layers:
+            layer.propagate()
+        network_answer = []
+        for node in self.layers[-1].nodes:
+            network_answer.append(node.get_value())
+        return network_answer
+        
+    

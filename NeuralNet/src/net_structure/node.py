@@ -32,10 +32,17 @@ class Node:
         return self.__value
     
     def set_value(self, value):
-        self.__value = value
+        self.__value = float(value)
+    
+    def clear_value(self):
+        self.__value = 0.0
         
     def add_to_current_value(self, value_to_add):
         self.__value += value_to_add
+        
+    def propagate(self):
+        for link in self.links:
+            link.node.add_to_current_value(self.get_value() * link.weight)
 
 class Bias(Node):
     pass
