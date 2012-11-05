@@ -4,7 +4,11 @@ Created on 05-11-2012
 @author: Tomasz
 '''
 import unittest
+from net_parser.parser import InputVectorParser, NetParser
+COMMON_DIR_PREFIX = '../../resources/integration_tests/'
 
+def parseNetAndVector(net_name, vector_name):
+        return (NetParser(COMMON_DIR_PREFIX+net_name).parse(), InputVectorParser(COMMON_DIR_PREFIX+vector_name).parse())
 
 class AndFunctionIntegrationTest(unittest.TestCase):
 
@@ -17,7 +21,8 @@ class AndFunctionIntegrationTest(unittest.TestCase):
         pass
 
     def testWithLinearActivationFunction(self):
-        pass
+        net, vector = parseNetAndVector('network_AND_LIN.xml','input_0_0.xml')
+        print(net.calculte_answer(vector))
 
     def testWithSigmoidActivationFunction(self):
         pass

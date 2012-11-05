@@ -1,74 +1,50 @@
 <neuralNet>
 
-    <layer>
+	<layer>
 
-        <node id="node1" >
+		<node id="node1">
 
-            <link
-                id="node3"
-                weight="4.54" />
+			<link id="node3" weight="4.54" />
 
-            <link
-                id="node4"
-                weight="-6.11" />
-        </node>
+			<link id="node4" weight="-6.11" />
+		</node>
 
-        <node id="node2" >
+		<node id="node2">
 
-            <link
-                id="node3"
-                weight="4.54" />
+			<link id="node3" weight="4.54" />
 
-            <link
-                id="node4"
-                weight="-6.11" />
-        </node>
+			<link id="node4" weight="-6.11" />
+		</node>
 
-        <bias>
+		<bias>
 
-            <link
-                id="node3"
-                weight="-7.06" />
+			<link id="node3" weight="-7.06" />
 
-            <link
-                id="node4"
-                weight="2.37" />
-        </bias>
-    </layer>
+			<link id="node4" weight="2.37" />
+		</bias>
+	</layer>
 
-    <layer>
+	<layer>
 
-        <node
-            id="node3"
-            activation="sigmoid" >
+		<node id="node3" activation="sigmoid">
 
-            <link
-                id="node5"
-                weight="-9.32" />
-        </node>
+			<link id="node5" weight="-9.32" />
+		</node>
 
-        <node
-            id="node4"
-            activation="sigmoid" >
+		<node id="node4" activation="sigmoid">
 
-            <link
-                id="node5"
-                weight="-9.1" />
-        </node>
+			<link id="node5" weight="-9.1" />
+		</node>
 
-        <bias>
+		<bias>
 
-            <link
-                id="node5"
-                weight="4.54" />
-        </bias>
-    </layer>
+			<link id="node5" weight="4.54" />
+		</bias>
+	</layer>
 
-    <layer>
+	<layer>
 
-        <node
-            id="node5"
-            activation="sigmoid" />
-    </layer>
+		<node id="node5" activation="sigmoid" />
+	</layer>
 
 </neuralNet>

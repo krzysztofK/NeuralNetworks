@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inputVector>
 
-	<node id="node1" value="0.0" />
+	<node id="node1" value="1.0" />
 
 	<node id="node2" value="0.0" />
 
