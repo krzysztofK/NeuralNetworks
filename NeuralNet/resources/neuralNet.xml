@@ -33,9 +33,9 @@
 
     <layer>
 
-        <node id="node3" activation="log"/>
+        <node id="node3" activation="sigmoid"/>
 
-        <node id="node4" activation="log"/>
+        <node id="node4" activation="threshold"/>
     </layer>
 
 </neuralNet>

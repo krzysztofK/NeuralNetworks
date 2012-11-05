@@ -5,7 +5,7 @@ Created on 02-11-2012
 '''
 from net_structure.link import Link
 from net_parser.exception import ParseException
-from net_structure.activation_function import ActivationFunction
+from net_structure.activation_function import ActivationFunctionFactory
 
 class Node:
     '''
@@ -53,7 +53,10 @@ class NeuronNode(Node) :
     
     def __init__(self, nodeId, links, activationFunction):
         Node.__init__(self, nodeId, links)
-        self.activationFunction = ActivationFunction(activationFunction)        
+        self.activationFunction = ActivationFunctionFactory.get_activation_function(activationFunction)        
     
     def __str__(self):
-        return self.activationFunction.function + '-' + Node.__str__(self)
+        return self.activationFunction.__name__ + '-' + Node.__str__(self)
+    
+    def get_value(self):
+        return self.activationFunction.calculate_value(super(NeuronNode, self).get_value())
