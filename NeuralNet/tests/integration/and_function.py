@@ -36,7 +36,10 @@ class AndFunctionIntegrationTest(unittest.TestCase):
         self.assertAlmostEqual(0.75, getNetworkResponse('network_AND_LIN.xml','input_1_1.xml'), 3)
 
     def testWithSigmoidActivationFunction(self):
-        pass
+        self.assertAlmostEqual(0, getNetworkResponse('network_AND_SIG.xml','input_0_0.xml'), 1)
+        self.assertAlmostEqual(0, getNetworkResponse('network_AND_SIG.xml','input_0_1.xml'), 1)
+        self.assertAlmostEqual(0, getNetworkResponse('network_AND_SIG.xml','input_1_0.xml'), 1)
+        self.assertAlmostEqual(1, getNetworkResponse('network_AND_SIG.xml','input_1_1.xml'), 1)
     
     def testWithThresholdActivationFunction(self):
         self.assertAlmostEqual(0, getNetworkResponse('network_AND_THRESHOLD.xml','input_0_0.xml'), 3)
