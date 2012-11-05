@@ -45,7 +45,8 @@ class Node:
             link.node.add_to_current_value(self.get_value() * link.weight)
 
 class Bias(Node):
-    pass
+    def get_value(self):
+        return 1.0
 
 
 class NeuronNode(Node) :

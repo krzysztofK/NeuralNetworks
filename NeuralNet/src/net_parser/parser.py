@@ -37,16 +37,19 @@ class NetParser:
         layers = []
         for element in net.getElementsByTagName(ROOT_NODE_NAME)[0].getElementsByTagName(LAYER_NODE_NAME):
             layerNodes = [NeuronNode(nodeElement.getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(nodeElement), nodeElement.getAttribute(ACTIVATION_ATTRIBUTE_NAME)) for nodeElement in element.getElementsByTagName(NODE_NAME)]
-            layerNodes = layerNodes + [Bias(biasElement.getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(biasElement)) for biasElement in element.getElementsByTagName(BIAS_NODE_NAME)]
+            biases = element.getElementsByTagName(BIAS_NODE_NAME)
+            bias = Bias(biases[0].getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(biases[0])) if biases is not None and len(biases) == 1 else Bias('mock', [])
             for node in layerNodes :
                 if not node.nodeId in nodes :
                     nodes[node.nodeId] = node
                 else :
                     raise ParseException('Node identifier ' + node.nodeId + ' is not unique')
-            layers.append(Layer(layerNodes))
+            layers.append(Layer(layerNodes, bias))
         for layer in layers :
             for node in layer.nodes :
                 node.updateLinks(nodes)
+            if layer.bias is not None:
+                layer.bias.updateLinks(nodes)
         return NeuralNetwork(layers)
     
     def parseLinks(self, node):

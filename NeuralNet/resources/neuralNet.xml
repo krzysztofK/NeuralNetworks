@@ -23,6 +23,12 @@
                 id="node4"
                 weight="0.1" />
         </node>
+        
+        <bias id="bias1">
+			<link
+                id="node3"
+                weight="1.0" />
+		</bias>
     </layer>
 
     <layer>

@@ -10,11 +10,12 @@ class Layer:
     '''
 
 
-    def __init__(self, nodes):
+    def __init__(self, nodes, bias):
         '''
         Constructor
         '''
         self.nodes = nodes
+        self.bias = bias
     
     def __str__(self):
         result = '-layer\n'
@@ -29,6 +30,7 @@ class Layer:
     def propagate(self):
         for node in self.nodes:
             node.propagate()
+        self.bias.propagate()
             
     def clear_values(self):
         for node in self.nodes:
