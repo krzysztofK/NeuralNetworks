@@ -9,7 +9,6 @@ class InputVector:
     classdocs
     '''
 
-
     def __init__(self, node_value_dict):
         self.__node_value_dict = node_value_dict
         

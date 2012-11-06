@@ -9,6 +9,7 @@ from net_structure.node import Node, Bias, NeuronNode
 from net_structure.layer import Layer
 from net_structure.link import Link
 from net_structure.network import NeuralNetwork
+from net_calculation.input_vector_factory import RandomInputVectorFactory
 
 ARG_COMMENT = '''Please specify arguments properly:
 python main.py network input_vector
@@ -17,6 +18,12 @@ network - xml file with neural network
 input_vector - (optional) xml file with input vector
 '''
 
+def prompt_for_random_limits():
+    print('The input vector file has not been specified. Input values will be generated randomly.')
+    min_val = float(input('Lower limit for input values: '))
+    max_val = float(input('Upper limit for input values: '))
+    return min_val, max_val
+
 if __name__ == '__main__':
     argc = len(sys.argv)
     if argc < 2 or argc > 3:
@@ -24,7 +31,9 @@ if __name__ == '__main__':
         sys.exit(1)
     elif argc == 2:
         network = NetParser(sys.argv[1]).parse()
-        input_vector = None
+        min_val, max_val = prompt_for_random_limits()
+        input_vector = RandomInputVectorFactory.create_new(min_val, max_val, network.layers[0].get_nodes_ids())
+        print('Generated vector:\n{}'.format(input_vector))
     elif argc == 3:
         network = NetParser(sys.argv[1]).parse()
         input_vector = InputVectorParser(sys.argv[2]).parse()

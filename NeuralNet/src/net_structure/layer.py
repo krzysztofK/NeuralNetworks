@@ -35,3 +35,10 @@ class Layer:
     def clear_values(self):
         for node in self.nodes:
             node.clear_value()
+            
+    def get_nodes_ids(self):
+        resp = []
+        for node in self.nodes:
+            resp.append(node.nodeId)
+        return resp
+            
