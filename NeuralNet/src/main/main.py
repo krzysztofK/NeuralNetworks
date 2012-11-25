@@ -4,6 +4,7 @@ Created on 05-11-2012
 @author: Tomasz
 '''
 import sys
+import argparse
 from net_parser.parser import NetParser, InputVectorParser
 from net_structure.node import Node, Bias, NeuronNode
 from net_structure.layer import Layer
@@ -25,18 +26,18 @@ def prompt_for_random_limits():
     return min_val, max_val
 
 if __name__ == '__main__':
-    argc = len(sys.argv)
-    if argc < 2 or argc > 3:
-        print(ARG_COMMENT)
-        sys.exit(1)
-    elif argc == 2:
-        network = NetParser(sys.argv[1]).parse()
-        min_val, max_val = prompt_for_random_limits()
-        input_vector = RandomInputVectorFactory.create_new(min_val, max_val, network.layers[0].get_nodes_ids())
+    argument_parser = argparse.ArgumentParser()
+    input_vector_group = argument_parser.add_mutually_exclusive_group(required=True)
+    input_vector_group.add_argument("--vector_file", help="xml file with input vector", type=open)
+    input_vector_group.add_argument("--vector_limits", metavar=('LOWER', 'UPPER'), help="lower and upper limit for input values", nargs=2, type=float)
+    argument_parser.add_argument("--network", help="xml file with neural network", type=open, required=True)
+    args = argument_parser.parse_args()
+    network = NetParser(args.network).parse()
+    if(args.vector_limits):
+        input_vector = RandomInputVectorFactory.create_new(args.vector_limits[0], args.vector_limits[1], network.layers[0].get_nodes_ids())
         print('Generated vector:\n{}'.format(input_vector))
-    elif argc == 3:
-        network = NetParser(sys.argv[1]).parse()
-        input_vector = InputVectorParser(sys.argv[2]).parse()
+    else:
+        input_vector = InputVectorParser(args.vector_file).parse()
     print('Network response is:')
     print(network.calculte_answer(input_vector))
     
