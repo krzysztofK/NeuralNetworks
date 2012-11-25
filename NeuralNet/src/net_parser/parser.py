@@ -5,7 +5,7 @@ Created on 02-11-2012
 '''
 from xml.dom.minidom import parse
 from net_structure.node import Node, Bias, NeuronNode
-from net_structure.layer import Layer
+from net_structure.layer import Layer, KohonenLayer
 from net_parser.exception import ParseException
 from net_structure.network import NeuralNetwork
 from net_calculation.input_vector import InputVector
@@ -22,6 +22,13 @@ ACTIVATION_ATTRIBUTE_NAME = 'activation'
 INPUT_VECTOR_ROOT_NODE_NAME = 'inputVector'
 VALUE_ATTRIBUTE_NAME = 'value'
 
+KOHONEN_LAYER_NODE_NAME = 'KohonenLayer'
+ROWS_ATTRIBUTE_NAME = 'rows'
+COLUMNS_ATTRIBUTE_NAME = 'columns'
+NEIGHBOURHOOD_ATTRIBUTE_NAME = 'neighbourhood'
+NEIGHBOURHOOD_VALUE_1D = '1D'
+NEIGHBOURHOOD_VALUE_2D = '2D'
+
 class NetParser:
     '''
     classdocs
@@ -35,7 +42,7 @@ class NetParser:
         net = parse(self.netFile)
         nodes = {}
         layers = []
-        for element in net.getElementsByTagName(ROOT_NODE_NAME)[0].getElementsByTagName(LAYER_NODE_NAME):
+        for element in net.getElementsByTagName(ROOT_NODE_NAME)[0].getElementsByTagName(LAYER_NODE_NAME) + net.getElementsByTagName(ROOT_NODE_NAME)[0].getElementsByTagName(KOHONEN_LAYER_NODE_NAME):
             layerNodes = [NeuronNode(nodeElement.getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(nodeElement, weightFunction), nodeElement.getAttribute(ACTIVATION_ATTRIBUTE_NAME)) for nodeElement in element.getElementsByTagName(NODE_NAME)]
             biases = element.getElementsByTagName(BIAS_NODE_NAME)
             bias = Bias(biases[0].getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(biases[0], weightFunction)) if biases is not None and len(biases) == 1 else Bias('mock', [])
@@ -44,7 +51,19 @@ class NetParser:
                     nodes[node.nodeId] = node
                 else :
                     raise ParseException('Node identifier ' + node.nodeId + ' is not unique')
-            layers.append(Layer(layerNodes, bias))
+            networkType = element.tagName
+            if networkType == KOHONEN_LAYER_NODE_NAME :
+                neighbourhoodType = element.getAttribute(NEIGHBOURHOOD_ATTRIBUTE_NAME)
+                rows = 1
+                columns = len(layerNodes)
+                if neighbourhoodType == NEIGHBOURHOOD_VALUE_1D :
+                    pass
+                elif neighbourhoodType == NEIGHBOURHOOD_VALUE_2D :
+                    rows = int(element.getAttribute(ROWS_ATTRIBUTE_NAME))
+                    columns = int(element.getAttribute(COLUMNS_ATTRIBUTE_NAME))
+                layers.append(KohonenLayer(layerNodes, bias, rows, columns))
+            else :
+                layers.append(Layer(layerNodes, bias))
         for layer in layers :
             for node in layer.nodes :
                 node.updateLinks(nodes)
@@ -72,9 +91,8 @@ class InputVectorParser:
         for node_element in input_vector_xml.getElementsByTagName(INPUT_VECTOR_ROOT_NODE_NAME)[0].getElementsByTagName(NODE_NAME):
             node_value_dict[node_element.getAttribute(NODE_ID_ATTRUBUTE_NAME)] = node_element.getAttribute(VALUE_ATTRIBUTE_NAME)
         return InputVector(node_value_dict) 
-        
-        
-
+             
 if __name__ == "__main__":
     print(NetParser('../../resources/neuralNet.xml').parse())
     print(InputVectorParser('../../resources/inputVector.xml').parse())
+    print(NetParser('../../resources/kohonen_networks/kohonen_network_lab2.xml').parse())

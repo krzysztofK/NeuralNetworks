@@ -57,7 +57,7 @@ class NeuronNode(Node) :
         self.activationFunction = ActivationFunctionFactory.get_activation_function(activationFunction)        
     
     def __str__(self):
-        return self.activationFunction.__name__ + '-' + Node.__str__(self)
+        return self.activationFunction.__class__.__name__ + '-' + Node.__str__(self)
     
     def get_value(self):
         return self.activationFunction.calculate_value(super(NeuronNode, self).get_value())

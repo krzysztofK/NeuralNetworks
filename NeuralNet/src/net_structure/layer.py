@@ -18,7 +18,7 @@ class Layer:
         self.bias = bias
     
     def __str__(self):
-        result = '-layer\n'
+        result = '-layer - ' + self.__class__.__name__ + '\n'
         for node in self.nodes :
             result = result + str(node)
         return result
@@ -41,4 +41,14 @@ class Layer:
         for node in self.nodes:
             resp.append(node.nodeId)
         return resp
-            
+
+class KohonenLayer(Layer):
+    
+    def __init__(self, nodes, bias, rows, columns):
+        Layer.__init__(self, nodes, bias)
+        self.rows = rows
+        self.columns = columns
+    
+    def __str__(self):
+        return Layer.__str__(self) + '- wymiar - ' + str(self.rows) + ' x ' + str(self.columns)
+    
