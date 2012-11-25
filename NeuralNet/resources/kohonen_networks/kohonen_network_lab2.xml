@@ -1,0 +1,124 @@
+<neuralNet>
+
+	<layer>
+
+		<node id="input1">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+
+		<node id="input2">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+
+		<node id="input3">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+		
+		<node id="input4">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+
+		<node id="input5">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+
+		<node id="input6">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+
+		<node id="input7">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+		
+		<node id="input8">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+
+		<node id="input9">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+		</node>
+								
+	</layer>
+
+	<layer>
+
+		<node id="k1" activation="linear"/>
+		<node id="k2" activation="linear"/>
+		<node id="k3" activation="linear"/>
+		<node id="k4" activation="linear"/>
+						
+	</layer>
+
+</neuralNet>
