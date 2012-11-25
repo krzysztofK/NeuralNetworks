@@ -31,14 +31,14 @@ class NetParser:
     def __init__(self, netFile):
         self.netFile = netFile
         
-    def parse(self):
+    def parse(self, weightFunction=None):
         net = parse(self.netFile)
         nodes = {}
         layers = []
         for element in net.getElementsByTagName(ROOT_NODE_NAME)[0].getElementsByTagName(LAYER_NODE_NAME):
-            layerNodes = [NeuronNode(nodeElement.getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(nodeElement), nodeElement.getAttribute(ACTIVATION_ATTRIBUTE_NAME)) for nodeElement in element.getElementsByTagName(NODE_NAME)]
+            layerNodes = [NeuronNode(nodeElement.getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(nodeElement, weightFunction), nodeElement.getAttribute(ACTIVATION_ATTRIBUTE_NAME)) for nodeElement in element.getElementsByTagName(NODE_NAME)]
             biases = element.getElementsByTagName(BIAS_NODE_NAME)
-            bias = Bias(biases[0].getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(biases[0])) if biases is not None and len(biases) == 1 else Bias('mock', [])
+            bias = Bias(biases[0].getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(biases[0], weightFunction)) if biases is not None and len(biases) == 1 else Bias('mock', [])
             for node in layerNodes :
                 if not node.nodeId in nodes :
                     nodes[node.nodeId] = node
@@ -52,8 +52,15 @@ class NetParser:
                 layer.bias.updateLinks(nodes)
         return NeuralNetwork(layers)
     
-    def parseLinks(self, node):
-        return [(link.getAttribute(NODE_ID_ATTRUBUTE_NAME), float(link.getAttribute(LINK_WEIGHT_ATTRIBUTE_NAME)))  for link in node.getElementsByTagName(LINK_NODE_NAME)]
+    def parseLinks(self, node, weightFunction=None):
+        links = []
+        for link in node.getElementsByTagName(LINK_NODE_NAME):
+            if weightFunction is not None:
+                weight = weightFunction()
+            else:
+                weight = float(link.getAttribute(LINK_WEIGHT_ATTRIBUTE_NAME))
+            links.append((link.getAttribute(NODE_ID_ATTRUBUTE_NAME), weight))
+        return links  
 
 class InputVectorParser:
     def __init__(self, input_vector_file):
