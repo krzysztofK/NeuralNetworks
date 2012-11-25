@@ -3,27 +3,10 @@ Created on 05-11-2012
 
 @author: Tomasz
 '''
-import sys
 import argparse
+import random
 from net_parser.parser import NetParser, InputVectorParser
-from net_structure.node import Node, Bias, NeuronNode
-from net_structure.layer import Layer
-from net_structure.link import Link
-from net_structure.network import NeuralNetwork
 from net_calculation.input_vector_factory import RandomInputVectorFactory
-
-ARG_COMMENT = '''Please specify arguments properly:
-python main.py network input_vector
-where
-network - xml file with neural network
-input_vector - (optional) xml file with input vector
-'''
-
-def prompt_for_random_limits():
-    print('The input vector file has not been specified. Input values will be generated randomly.')
-    min_val = float(input('Lower limit for input values: '))
-    max_val = float(input('Upper limit for input values: '))
-    return min_val, max_val
 
 if __name__ == '__main__':
     argument_parser = argparse.ArgumentParser()
@@ -31,11 +14,21 @@ if __name__ == '__main__':
     input_vector_group.add_argument("--vector_file", help="xml file with input vector", type=open)
     input_vector_group.add_argument("--vector_limits", metavar=('LOWER', 'UPPER'), help="lower and upper limit for input values", nargs=2, type=float)
     argument_parser.add_argument("--network", help="xml file with neural network", type=open, required=True)
+    link_weights_group = argument_parser.add_mutually_exclusive_group()
+    link_weights_group.add_argument('--random', metavar=('LOWER', 'UPPER'), help="lower and upper limit for random link weights", nargs=2, type=float)
+    link_weights_group.add_argument('--zeros', action="store_true")
     args = argument_parser.parse_args()
-    network = NetParser(args.network).parse()
-    if(args.vector_limits):
+    weight_function = None
+    if args.random:
+        print('Weight of links between nodes will be set to random values from range [{}; {}]'.format(args.random[0], args.random[1]))
+        weight_function = lambda : random.uniform(args.random[0], args.random[1])
+    elif args.zeros:
+        print('Weight of links between nodes will be set to 0.')
+        weight_function = lambda : 0.0
+    network = NetParser(args.network).parse(weight_function)
+    if args.vector_limits:
         input_vector = RandomInputVectorFactory.create_new(args.vector_limits[0], args.vector_limits[1], network.layers[0].get_nodes_ids())
-        print('Generated vector:\n{}'.format(input_vector))
+        print('Generated vector with values from range [{}; {}]:\n{}'.format(args.vector_limits[0], args.vector_limits[1], input_vector))
     else:
         input_vector = InputVectorParser(args.vector_file).parse()
     print('Network response is:')
