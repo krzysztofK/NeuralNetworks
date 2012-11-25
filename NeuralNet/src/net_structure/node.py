@@ -41,8 +41,9 @@ class Node:
         self.__value += value_to_add
         
     def propagate(self):
+        postActivationValue = self.get_value()
         for link in self.links:
-            link.node.add_to_current_value(self.get_value() * link.weight)
+            link.node.add_to_current_value(postActivationValue * link.weight)
 
 class Bias(Node):
     def get_value(self):
