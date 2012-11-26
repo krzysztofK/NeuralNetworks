@@ -50,5 +50,5 @@ class KohonenLayer(Layer):
         self.columns = columns
     
     def __str__(self):
-        return Layer.__str__(self) + '- wymiar - ' + str(self.rows) + ' x ' + str(self.columns)
+        return Layer.__str__(self) + '- dimension - ' + str(self.rows) + ' x ' + str(self.columns)
     

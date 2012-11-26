@@ -42,10 +42,16 @@ class NetParser:
         net = parse(self.netFile)
         nodes = {}
         layers = []
-        for element in net.getElementsByTagName(ROOT_NODE_NAME)[0].getElementsByTagName(LAYER_NODE_NAME) + net.getElementsByTagName(ROOT_NODE_NAME)[0].getElementsByTagName(KOHONEN_LAYER_NODE_NAME):
-            layerNodes = [NeuronNode(nodeElement.getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(nodeElement, weightFunction), nodeElement.getAttribute(ACTIVATION_ATTRIBUTE_NAME)) for nodeElement in element.getElementsByTagName(NODE_NAME)]
+        rootElement = net.getElementsByTagName(ROOT_NODE_NAME)[0]
+        for element in rootElement.getElementsByTagName(LAYER_NODE_NAME) + rootElement.getElementsByTagName(KOHONEN_LAYER_NODE_NAME):
+            layerNodes = [NeuronNode(nodeElement.getAttribute(NODE_ID_ATTRUBUTE_NAME),\
+                                     self.parseLinks(nodeElement, weightFunction),\
+                                     nodeElement.getAttribute(ACTIVATION_ATTRIBUTE_NAME))\
+                          for nodeElement in element.getElementsByTagName(NODE_NAME)]
             biases = element.getElementsByTagName(BIAS_NODE_NAME)
-            bias = Bias(biases[0].getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(biases[0], weightFunction)) if biases is not None and len(biases) == 1 else Bias('mock', [])
+            bias = Bias(biases[0].getAttribute(NODE_ID_ATTRUBUTE_NAME), self.parseLinks(biases[0], weightFunction))\
+                        if biases is not None and len(biases) == 1\
+                        else Bias('mock', [])
             for node in layerNodes :
                 if not node.nodeId in nodes :
                     nodes[node.nodeId] = node
