@@ -28,5 +28,14 @@ class NeuralNetwork :
         for node in self.layers[-1].nodes:
             network_answer.append(node.get_value())
         return network_answer
+    
+    def learn(self, input_vector, coefficient):
+        for node in self.layers[-1].nodes:
+            node.normize()
+        result = self.calculte_answer(input_vector)
+        self.layers[-1].learn(coefficient)
+        for node in self.layers[-1].nodes:
+            node.normize()
+        return result
         
     

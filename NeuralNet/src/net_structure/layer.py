@@ -44,11 +44,24 @@ class Layer:
 
 class KohonenLayer(Layer):
     
-    def __init__(self, nodes, bias, rows, columns):
+    def __init__(self, nodes, bias, neighbourhoodType, rows, columns, conscience):
         Layer.__init__(self, nodes, bias)
+        self.neighbourhoodType = neighbourhoodType
         self.rows = rows
         self.columns = columns
+        self.conscience = conscience
     
     def __str__(self):
         return Layer.__str__(self) + '- dimension - ' + str(self.rows) + ' x ' + str(self.columns)
     
+    def learn(self, coefficient):
+        maximum = None
+        for node in self.nodes:
+            current_value = node.get_value()
+            if (maximum is None) or (current_value > maximum[0]):
+                maximum = (current_value, node)
+        if self.conscience:
+            pass
+        if self.neighbourhoodType:
+            pass
+        maximum[1].learn(coefficient)

@@ -67,3 +67,16 @@ class NeuronNode(Node) :
     
     def get_value(self):
         return self.activationFunction.calculate_value(super(NeuronNode, self).get_value())
+    
+    def learn(self, coefficient):
+        for link in self.backward_links:
+            link.weight = link.weight + coefficient * (link.from_node.get_value() - link.weight)
+            
+    def normize(self):
+        weight_sum = 0.0
+        for link in self.backward_links:
+            weight_sum += link.weight
+        if abs(weight_sum - 0.0) > 0.00000001:
+            for link in self.backward_links:
+                link.weight =  link.weight / weight_sum
+            

@@ -28,6 +28,7 @@ COLUMNS_ATTRIBUTE_NAME = 'columns'
 NEIGHBOURHOOD_ATTRIBUTE_NAME = 'neighbourhood'
 NEIGHBOURHOOD_VALUE_1D = '1D'
 NEIGHBOURHOOD_VALUE_2D = '2D'
+CONSCIENCE_ATTRIBUTE_NAME = 'conscience'
 
 class NetParser:
     '''
@@ -60,6 +61,7 @@ class NetParser:
             networkType = element.tagName
             if networkType == KOHONEN_LAYER_NODE_NAME :
                 neighbourhoodType = element.getAttribute(NEIGHBOURHOOD_ATTRIBUTE_NAME)
+                conscience = True if element.getAttribute(CONSCIENCE_ATTRIBUTE_NAME) == 'true' else False
                 rows = 1
                 columns = len(layerNodes)
                 if neighbourhoodType == NEIGHBOURHOOD_VALUE_1D :
@@ -67,7 +69,7 @@ class NetParser:
                 elif neighbourhoodType == NEIGHBOURHOOD_VALUE_2D :
                     rows = int(element.getAttribute(ROWS_ATTRIBUTE_NAME))
                     columns = int(element.getAttribute(COLUMNS_ATTRIBUTE_NAME))
-                layers.append(KohonenLayer(layerNodes, bias, rows, columns))
+                layers.append(KohonenLayer(layerNodes, bias, neighbourhoodType, rows, columns, conscience))
             else :
                 layers.append(Layer(layerNodes, bias))
         for layer in layers :
