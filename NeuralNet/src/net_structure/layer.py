@@ -3,6 +3,7 @@ Created on 02-11-2012
 
 @author: Krzysztof
 '''
+from net_structure.neighbourhood_function import NeighbourhoodFucntion
 
 class Layer:
     '''
@@ -50,7 +51,8 @@ class KohonenLayer(Layer):
         self.rows = rows
         self.columns = columns
         self.conscience = conscience
-    
+        self.neighbourhoodFunction = NeighbourhoodFucntion()
+        
     def __str__(self):
         return Layer.__str__(self) + '- dimension - ' + str(self.rows) + ' x ' + str(self.columns)
     
@@ -64,9 +66,20 @@ class KohonenLayer(Layer):
             #TODO:
             #Change maximum(winner node) if it wins too often
             pass
+        
         if self.neighbourhoodType:
-            #TODO:
-            #Select neighbours of winner node
-            #Invoke learn(h(winner, that node) * coefficient)
-            pass
+            winnerIndex = self.nodes.index(maximum[1])
+            for nodeIndex in range(len(self.nodes)) :
+                if winnerIndex != nodeIndex :
+                    self.nodes[nodeIndex].learn(coefficient * self.neighbourhoodFunction.calculate(self.distance(nodeIndex, winnerIndex)))
         maximum[1].learn(coefficient)
+    
+    def distance(self, nodeIndex, winnerIndex):
+        return abs(self.row(nodeIndex) - self.row(winnerIndex)) + abs(self.column(nodeIndex) - self.column(winnerIndex))
+        
+    def row(self, index):
+        return index / self.rows
+    
+    def column(self, index):
+        return index % self.rows
+    
