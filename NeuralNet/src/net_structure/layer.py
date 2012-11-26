@@ -61,7 +61,12 @@ class KohonenLayer(Layer):
             if (maximum is None) or (current_value > maximum[0]):
                 maximum = (current_value, node)
         if self.conscience:
+            #TODO:
+            #Change maximum(winner node) if it wins too often
             pass
         if self.neighbourhoodType:
+            #TODO:
+            #Select neighbours of winner node
+            #Invoke learn(h(winner, that node) * coefficient)
             pass
         maximum[1].learn(coefficient)

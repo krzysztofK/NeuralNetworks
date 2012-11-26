@@ -30,6 +30,8 @@ class NeuralNetwork :
         return network_answer
     
     def learn(self, input_vector, coefficient):
+        #TODO:
+        #Find a better way to store normalized weights vector
         for node in self.layers[-1].nodes:
             node.normize()
         result = self.calculte_answer(input_vector)

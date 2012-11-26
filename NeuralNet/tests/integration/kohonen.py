@@ -12,6 +12,9 @@ def parseNetAndVector(net_name, vector_name):
 
 class Test(unittest.TestCase):
 
+    #TODO:
+    #Add more tests
+
     def testSilly(self):
         network, vector = parseNetAndVector("kohonen_network_lab2.xml", "input1.xml")
         for i in range(1, 10):
