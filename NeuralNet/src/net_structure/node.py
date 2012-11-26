@@ -15,10 +15,16 @@ class Node:
     def __init__(self, nodeId, links):
         self.nodeId = nodeId
         self.links = links
+        self.backward_links = []
     
     def updateLinks(self, nodes):
         try :
-            self.links = [Link(nodes[nodeId], weight) for (nodeId, weight) in self.links]
+            temp_links = []
+            for (nodeId, weight) in self.links:
+                link = Link(self, nodes[nodeId], weight)
+                temp_links.append(link)
+                nodes[nodeId].backward_links.append(link)
+            self.links = temp_links
         except :
             raise ParseException('There is no node with specified identifier')
         
@@ -43,7 +49,7 @@ class Node:
     def propagate(self):
         postActivationValue = self.get_value()
         for link in self.links:
-            link.node.add_to_current_value(postActivationValue * link.weight)
+            link.to_node.add_to_current_value(postActivationValue * link.weight)
 
 class Bias(Node):
     def get_value(self):
