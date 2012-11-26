@@ -52,21 +52,28 @@ class KohonenLayer(Layer):
         self.columns = columns
         self.conscience = conscience
         self.neighbourhoodFunction = NeighbourhoodFucntion()
+        self.winFrequencies = {}
+        self.nodesCount = len(self.nodes)
+        for node in self.nodes :
+            self.winFrequencies[node] = 1.0 / self.nodesCount
+        self.stepsCount = 0
         
     def __str__(self):
         return Layer.__str__(self) + '- dimension - ' + str(self.rows) + ' x ' + str(self.columns)
     
-    def learn(self, coefficient):
+    def learn(self, coefficient, conscienceCoefficient):
         maximum = None
         for node in self.nodes:
-            current_value = node.get_value()
+            current_value = node.get_value() + conscienceCoefficient * (1.0 - float(self.nodesCount) * self.winFrequencies[node])
             if (maximum is None) or (current_value > maximum[0]):
                 maximum = (current_value, node)
+
         if self.conscience:
-            #TODO:
-            #Change maximum(winner node) if it wins too often
-            pass
-        
+            for node in self.nodes :
+                self.winFrequencies[node] = self.winFrequencies[node] * self.stepsCount + 1 if node == maximum[1] else self.winFrequencies[node] * self.stepsCount
+                self.winFrequencies[node] = self.winFrequencies[node] / (self.stepsCount + 1)
+            self.stepsCount = self.stepsCount + 1
+                    
         if self.neighbourhoodType:
             winnerIndex = self.nodes.index(maximum[1])
             for nodeIndex in range(len(self.nodes)) :

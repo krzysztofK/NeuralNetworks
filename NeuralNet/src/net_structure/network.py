@@ -29,13 +29,13 @@ class NeuralNetwork :
             network_answer.append(node.get_value())
         return network_answer
     
-    def learn(self, input_vector, coefficient):
+    def learn(self, input_vector, coefficient, conscienceCoefficient):
         #TODO:
         #Find a better way to store normalized weights vector
         for node in self.layers[-1].nodes:
             node.normize()
         result = self.calculte_answer(input_vector)
-        self.layers[-1].learn(coefficient)
+        self.layers[-1].learn(coefficient, conscienceCoefficient)
         for node in self.layers[-1].nodes:
             node.normize()
         return result

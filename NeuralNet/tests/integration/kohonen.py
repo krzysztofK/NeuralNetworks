@@ -18,7 +18,7 @@ class Test(unittest.TestCase):
     def testSilly(self):
         network, vector = parseNetAndVector("kohonen_network_lab2.xml", "input1.xml")
         for i in range(1, 10):
-            network.learn(vector, 0.5 / float(i))
+            network.learn(vector, 0.5 / float(i), 0.2)
             print(network)
 
 
