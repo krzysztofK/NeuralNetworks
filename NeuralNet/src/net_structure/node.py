@@ -32,6 +32,9 @@ class Node:
         result = '\t-node ' + self.nodeId +'\n'
         for link in self.links :
             result = result + str(link)
+        if self.links is None or len(self.links) == 0:
+            for link in self.backward_links :
+                result = result + str(link)
         return result
     
     def get_value(self):
