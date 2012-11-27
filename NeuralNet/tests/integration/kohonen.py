@@ -28,13 +28,18 @@ class Test(unittest.TestCase):
             network.learn(vector4, coefficient * reducer, conscience_coefficient * reducer)
             if i % 8000 == 0:
                 print(network)
-        print(network.calculte_answer(vector1))
-        print(network.calculte_answer(vector2))
-        print(network.calculte_answer(vector3))
-        print(network.calculte_answer(vector4))
+                
+        self.printResult(network, vector1)
+        self.printResult(network, vector2)
+        self.printResult(network, vector3)
+        self.printResult(network, vector4)
         vector5 = InputVectorParser(COMMON_DIR_PREFIX+"input5.xml").parse()
-        print(network.calculte_answer(vector5))
-
+        self.printResult(network, vector5)
+        
+    def printResult(self, network, vector):
+        vector.printVector(3)
+        print(network.calculte_answer(vector))
+        
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
     unittest.main()
