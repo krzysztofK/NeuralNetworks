@@ -29,6 +29,7 @@ NEIGHBOURHOOD_ATTRIBUTE_NAME = 'neighbourhood'
 NEIGHBOURHOOD_VALUE_1D = '1D'
 NEIGHBOURHOOD_VALUE_2D = '2D'
 CONSCIENCE_ATTRIBUTE_NAME = 'conscience'
+CONSCIENCE_COEFF_ATTRIBUTE_NAME = 'conscience_coefficient'
 
 class NetParser:
     '''
@@ -44,6 +45,7 @@ class NetParser:
         nodes = {}
         layers = []
         rootElement = net.getElementsByTagName(ROOT_NODE_NAME)[0]
+        conscience_coeff = None
         for element in rootElement.getElementsByTagName(LAYER_NODE_NAME) + rootElement.getElementsByTagName(KOHONEN_LAYER_NODE_NAME):
             layerNodes = [NeuronNode(nodeElement.getAttribute(NODE_ID_ATTRUBUTE_NAME),\
                                      self.parseLinks(nodeElement, weightFunction),\
@@ -62,6 +64,7 @@ class NetParser:
             if networkType == KOHONEN_LAYER_NODE_NAME :
                 neighbourhoodType = element.getAttribute(NEIGHBOURHOOD_ATTRIBUTE_NAME)
                 conscience = True if element.getAttribute(CONSCIENCE_ATTRIBUTE_NAME) == 'true' else False
+                conscience_coeff = float(element.getAttribute(CONSCIENCE_COEFF_ATTRIBUTE_NAME))
                 rows = 1
                 columns = len(layerNodes)
                 if neighbourhoodType == NEIGHBOURHOOD_VALUE_1D :
@@ -77,7 +80,7 @@ class NetParser:
                 node.updateLinks(nodes)
             if layer.bias is not None:
                 layer.bias.updateLinks(nodes)
-        return NeuralNetwork(layers)
+        return NeuralNetwork(layers, conscience_coeff)
     
     def parseLinks(self, node, weightFunction=None):
         links = []

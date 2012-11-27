@@ -6,8 +6,9 @@ Created on 02-11-2012
 
 class NeuralNetwork :
     
-    def __init__(self, layers):
+    def __init__(self, layers, conscienceCoefficient=None):
         self.layers = layers
+        self.conscienceCoefficient = conscienceCoefficient if conscienceCoefficient is not None else 0.0
     
     def __str__(self):
         result = ''
@@ -40,4 +41,10 @@ class NeuralNetwork :
             node.normize()
         return result
         
+    def learning_process(self, input_vectors, coefficient, coefficient_half_life, turns):
+        for i in range(1, turns):
+            reducer = pow(0.5, i/coefficient_half_life) if coefficient_half_life is not None else 1.0
+            for input_vector in input_vectors:
+                self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer)
+        print(self)
     

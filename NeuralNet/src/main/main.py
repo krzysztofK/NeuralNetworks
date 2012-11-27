@@ -17,6 +17,10 @@ if __name__ == '__main__':
     link_weights_group = argument_parser.add_mutually_exclusive_group()
     link_weights_group.add_argument('--random', metavar=('LOWER', 'UPPER'), help="lower and upper limit for random link weights", nargs=2, type=float)
     link_weights_group.add_argument('--zeros', action="store_true")
+    argument_parser.add_argument('--coefficient', help="learning coefficient(alpha)", type=float)
+    argument_parser.add_argument('--coefficient_half_life', help="turns after coefficient is reduced by half", type=int)
+    argument_parser.add_argument('--turns', help="how many turns learning will take", type=int)
+    argument_parser.add_argument('--learn', action="store_true")
     args = argument_parser.parse_args()
     weight_function = None
     if args.random:
@@ -31,6 +35,9 @@ if __name__ == '__main__':
         print('Generated vector with values from range [{}; {}]:\n{}'.format(args.vector_limits[0], args.vector_limits[1], input_vector))
     else:
         input_vector = InputVectorParser(args.vector_file).parse()
-    print('Network response is:')
-    print(network.calculte_answer(input_vector))
+    if args.learn:
+        network.learning_process([input_vector], args.coefficient, args.coefficient_half_life, args.turns)
+    else:
+        print('Network response is:')
+        print(network.calculte_answer(input_vector))
     
