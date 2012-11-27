@@ -112,7 +112,7 @@
 								
 	</layer>
 
-	<KohonenLayer conscience="true">
+	<KohonenLayer conscience="true" >
 <!-- 	<KohonenLayer neighbourhood="2D" rows="2" columns="2">
  -->	    
 		<node id="k1" activation="linear"/>
