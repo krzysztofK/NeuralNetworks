@@ -20,4 +20,12 @@ class InputVector:
         for node, value in self.__node_value_dict.items():
             result += 'Node {} has value {}\n'.format(node, value)
         return result
-        
+    
+    def printVector(self, columnSize):
+        count = 0
+        for node in sorted(self.__node_value_dict.keys()) :
+            print(self.get_value_for_node(node), end='')
+            count = count + 1
+            if count == columnSize :
+                count = 0
+                print('')

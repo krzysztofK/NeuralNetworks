@@ -25,3 +25,9 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+/NeuralNet.zip
+/NeuralNet/.project
+/NeuralNet/.pydevproject
+/doc/NeuralNet.vpp~13
+/doc/NeuralNet.vpp~14
