@@ -38,42 +38,43 @@ class NeuralNetwork :
             network_answer.append(node.get_value())
         return network_answer
     
-    def learn(self, input_vector, coefficient, conscienceCoefficient):
+    def learn(self, input_vector, coefficient, conscienceCoefficient, neighbourhoodWidth):
         #TODO:
         #Find a better way to store normalized weights vector
         for node in self.kohonenLayer.nodes:
             node.normize()
         result = self.calculte_answer(input_vector)
-        self.kohonenLayer.learn(coefficient, conscienceCoefficient)
+        self.kohonenLayer.learn(coefficient, conscienceCoefficient, neighbourhoodWidth)
         for node in self.kohonenLayer.nodes:
             node.normize()
         return result
         
-    def learning_process(self, input_vectors, coefficient, coefficient_half_life, turns):
+    def learning_process(self, input_vectors, coefficient, coefficient_half_life, turns, neighbourhoodWidth):
         for i in range(1, turns):
             reducer = pow(0.5, i/coefficient_half_life) if coefficient_half_life is not None else 1.0
             for input_vector in input_vectors:
-                self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer)
+                self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer, neighbourhoodWidth)
         print(self)
 
-    def cp_learning_process(self, input_vectors, coefficient, coefficient_half_life, turns, grossberg_coefficient):
+    def cp_learning_process(self, input_vectors, coefficient, coefficient_half_life, turns, neighbourhoodWidth, grossberg_coefficient, grossberg_coefficient_half_life):
+        for input_vector in input_vectors :
+            input_vector.normize()
         for i in range(1, turns):
             reducer = pow(0.5, i/coefficient_half_life) if coefficient_half_life is not None else 1.0
-            grossberg_reducer = 0.0 if turns < 2000 else 1.0
+            grossberg_reducer = pow(0.5, i/grossberg_coefficient_half_life) if i > 2000 else 0.0
             for input_vector in input_vectors:
-                self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer)
-                result = self.calculte_answer(input_vector)
+                self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer, neighbourhoodWidth)
+                #result = self.calculte_answer(input_vector)
                 max_value = 0.0
                 winner = None
                 for node in self.kohonenLayer.nodes :
                     if node.get_value() > max_value :
                         max_value = node.get_value()
                         winner = node
+                self.calculte_answer(input_vector)
                 for node in self.grossbergLayer.nodes :
-                    value = result[0]
-                    result = result[1:]
+                    value = node.get_value()
                     expected_value = input_vector.expected_value_dict[node.nodeId]
                     for link in node.backward_links :
                         if link.from_node is winner :
-                            link.windrow_hoff_learn(value, expected_value, grossberg_coefficient * grossberg_reducer * reducer)
-                            
+                            link.windrow_hoff_learn(value, expected_value, grossberg_coefficient * grossberg_reducer)

@@ -105,7 +105,7 @@ class InputVectorParser:
         input_vector_xml = parse(self.input_vector_file)
         node_value_dict = {}
         for node_element in input_vector_xml.getElementsByTagName(INPUT_VECTOR_ROOT_NODE_NAME)[0].getElementsByTagName(NODE_NAME):
-            node_value_dict[node_element.getAttribute(NODE_ID_ATTRUBUTE_NAME)] = node_element.getAttribute(VALUE_ATTRIBUTE_NAME)
+            node_value_dict[node_element.getAttribute(NODE_ID_ATTRUBUTE_NAME)] = float(node_element.getAttribute(VALUE_ATTRIBUTE_NAME))
             
         expected_value_dict = {}
         for node_element in input_vector_xml.getElementsByTagName(INPUT_VECTOR_ROOT_NODE_NAME)[0].getElementsByTagName(RESULT_NODE_NAME):
