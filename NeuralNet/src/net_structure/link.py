@@ -17,3 +17,6 @@ class Link:
 
     def __str__(self):
         return '\t\t-link(' + str(self.weight) + ') from ' + self.from_node.nodeId + ' to ' + self.to_node.nodeId + '\n' 
+    
+    def windrow_hoff_learn(self, value, expected_value, coefficient, k = 1.0):
+        self.weight = self.weight + coefficient * (value - expected_value) * k

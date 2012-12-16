@@ -29,3 +29,9 @@ class InputVector:
             if count == columnSize :
                 count = 0
                 print('')
+
+class LearningVector(InputVector):
+    
+    def __init__(self, node_value_dict, expected_value_dict):
+        InputVector.__init__(self, node_value_dict)
+        self.expected_value_dict = expected_value_dict

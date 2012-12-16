@@ -263,15 +263,9 @@
 		</node>		 
 	</KohonenLayer>
 	
-	<layer>
+	<GrossbergLayer>
 	    <node id="g1" activation="linear"/>
 	    <node id="g2" activation="linear"/>
 	    <node id="g3" activation="linear"/>
-	    <node id="g4" activation="linear"/>
-	    <node id="g5" activation="linear"/>
-	    <node id="g6" activation="linear"/>
-	    <node id="g7" activation="linear"/>
-	    <node id="g8" activation="linear"/>
-	    <node id="g9" activation="linear"/>
-	</layer>
+	</GrossbergLayer>
 </neuralNet>

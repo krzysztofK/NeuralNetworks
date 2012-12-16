@@ -89,4 +89,8 @@ class KohonenLayer(Layer):
     
     def column(self, index):
         return index % self.rows
+
+class GrossbergLayer(Layer):
     
+    def __init__(self, nodes, bias):
+        Layer.__init__(self, nodes, bias)    
