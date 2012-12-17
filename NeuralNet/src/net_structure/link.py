@@ -18,5 +18,14 @@ class Link:
     def __str__(self):
         return '\t\t-link(' + str(self.weight) + ') from ' + self.from_node.nodeId + ' to ' + self.to_node.nodeId + '\n' 
     
+    def learn(self, value, expected_value, coefficient, k = 1.0):
+        if self.to_node.activationFunction.get_name() == 'sigmoid':
+            self.delta_learn(self, value, expected_value, coefficient, self.to_node.activationFunction, k = 1.0)
+        else: 
+            self.windrow_hoff_learn(self, value, expected_value, coefficient)
+            
     def windrow_hoff_learn(self, value, expected_value, coefficient, k = 1.0):
         self.weight = self.weight + coefficient * (expected_value - value) * k
+        
+    def delta_learn(self, value, expected_value, coefficient, activation_function, k = 1.0):
+        self.weight = self.weight + coefficient * (expected_value - value) * k * activation_function.derivative_value(value)

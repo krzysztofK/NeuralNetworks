@@ -71,4 +71,4 @@ class NeuralNetwork :
                         nextNode = link.to_node
                         value = nextNode.get_value()
                         expected_value = input_vector.expected_value_dict[nextNode.nodeId]
-                        link.windrow_hoff_learn(value, expected_value, grossberg_coefficient * grossberg_reducer)
+                        link.learn(value, expected_value, grossberg_coefficient * grossberg_reducer)
