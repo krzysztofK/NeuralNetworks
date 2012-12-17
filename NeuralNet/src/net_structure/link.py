@@ -20,9 +20,9 @@ class Link:
     
     def learn(self, value, expected_value, coefficient, k = 1.0):
         if self.to_node.activationFunction.get_name() == 'sigmoid':
-            self.delta_learn(self, value, expected_value, coefficient, self.to_node.activationFunction, k = 1.0)
+            self.delta_learn(value, expected_value, coefficient, self.to_node.activationFunction, k = 1.0)
         else: 
-            self.windrow_hoff_learn(self, value, expected_value, coefficient)
+            self.windrow_hoff_learn(value, expected_value, coefficient)
             
     def windrow_hoff_learn(self, value, expected_value, coefficient, k = 1.0):
         self.weight = self.weight + coefficient * (expected_value - value) * k
