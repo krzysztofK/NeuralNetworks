@@ -83,6 +83,7 @@ class NeuronNode(Node) :
 #        if abs(weight_sum - 0.0) > 0.00000001:
 #            for link in self.backward_links:
 #                link.weight =  link.weight / weight_sum
+
         weight_sum = 0.0
         for link in self.backward_links:
             weight_sum += link.weight

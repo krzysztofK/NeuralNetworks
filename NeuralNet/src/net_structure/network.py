@@ -61,20 +61,14 @@ class NeuralNetwork :
             input_vector.normize()
         for i in range(1, turns):
             reducer = pow(0.5, i/coefficient_half_life) if coefficient_half_life is not None else 1.0
-            grossberg_reducer = pow(0.5, i/grossberg_coefficient_half_life) if i > 2000 else 0.0
+            grossberg_reducer = pow(0.5, i/grossberg_coefficient_half_life) if i > 2000 else 1.0
             for input_vector in input_vectors:
                 self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer, neighbourhoodWidth)
-                #result = self.calculte_answer(input_vector)
-                max_value = 0.0
-                winner = None
-                for node in self.kohonenLayer.nodes :
-                    if node.get_value() > max_value :
-                        max_value = node.get_value()
-                        winner = node
-                self.calculte_answer(input_vector)
-                for node in self.grossbergLayer.nodes :
-                    value = node.get_value()
-                    expected_value = input_vector.expected_value_dict[node.nodeId]
-                    for link in node.backward_links :
-                        if link.from_node is winner :
-                            link.windrow_hoff_learn(value, expected_value, grossberg_coefficient * grossberg_reducer)
+                winner = self.kohonenLayer.winner
+                #self.calculte_answer(input_vector)
+                if winner is not None :
+                    for link in winner.links :
+                        nextNode = link.to_node
+                        value = nextNode.get_value()
+                        expected_value = input_vector.expected_value_dict[nextNode.nodeId]
+                        link.windrow_hoff_learn(value, expected_value, grossberg_coefficient * grossberg_reducer)

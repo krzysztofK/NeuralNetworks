@@ -14,8 +14,8 @@ class Test(unittest.TestCase):
         inputVectors = [InputVectorParser(COMMON_DIR_PREFIX + LEARNING_VECTOR_FILE_PREFIX + str(i) + '.xml').parse() for i in range(1, 10)]
         testVectors = [InputVectorParser(COMMON_DIR_PREFIX + TEST_VECTOR_FILE_PREFIX + str(i) + '.xml').parse() for i in range(1, 4)]
         network = NetParser(COMMON_DIR_PREFIX + NETWORK_FILE).parse()
-        coefficient = 0.05
-        coefficient_half_life = 600
+        coefficient = 0.04
+        coefficient_half_life = 500
         grossberg_coefficient_half_life = 10000
         turns = 5000
         grossberg_coefficient = 0.4

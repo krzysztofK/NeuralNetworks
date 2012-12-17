@@ -80,7 +80,8 @@ class KohonenLayer(Layer):
                 if winnerIndex != nodeIndex :
                     self.nodes[nodeIndex].learn(coefficient * self.neighbourhoodFunction.calculate(self.distance(nodeIndex, winnerIndex), neighbourhoodWidth))
         maximum[1].learn(coefficient)
-    
+        self.winner = maximum[1]
+        
     def distance(self, nodeIndex, winnerIndex):
         return abs(self.row(nodeIndex) - self.row(winnerIndex)) + abs(self.column(nodeIndex) - self.column(winnerIndex))
         
