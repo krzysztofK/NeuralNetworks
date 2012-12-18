@@ -1,0 +1,98 @@
+<neuralNet>
+
+	<layer>
+
+		<node id="input1">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+
+			<link id="k5" weight="0.0" />
+
+			<link id="k6" weight="0.0" />
+
+			<link id="k7" weight="0.0" />
+
+			<link id="k8" weight="0.0" />
+		</node>
+
+		<node id="input2">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+			
+			<link id="k5" weight="0.0" />
+
+			<link id="k6" weight="0.0" />
+
+			<link id="k7" weight="0.0" />
+
+			<link id="k8" weight="0.0" />
+						
+		</node>
+
+		<node id="input3">
+
+			<link id="k1" weight="0.0" />
+
+			<link id="k2" weight="0.0" />
+
+			<link id="k3" weight="0.0" />
+
+			<link id="k4" weight="0.0" />
+
+			<link id="k5" weight="0.0" />
+
+			<link id="k6" weight="0.0" />
+
+			<link id="k7" weight="0.0" />
+
+			<link id="k8" weight="0.0" />
+			
+		</node>
+		
+	</layer>
+
+	<KohonenLayer neighbourhood="1D" conscience="true" conscience_coefficient="1.0">
+<!-- 	<KohonenLayer neighbourhood="2D" rows="2" columns="2">
+ -->	    
+		<node id="k1" activation="linear">
+		    <link id="g1" weight="0.0" />
+		</node>		    
+		<node id="k2" activation="linear">
+		    <link id="g1" weight="0.0" />
+		</node>		    
+		<node id="k3" activation="linear">
+		    <link id="g1" weight="0.0" />
+		</node>		    
+		<node id="k4" activation="linear">
+		    <link id="g1" weight="0.0" />
+		</node>		 
+		<node id="k5" activation="linear">
+		    <link id="g1" weight="0.0" />
+		</node>		 
+ 		<node id="k6" activation="linear">
+		    <link id="g1" weight="0.0" />
+		</node>		 
+ 		<node id="k7" activation="linear">
+		    <link id="g1" weight="0.0" />
+		</node>		 
+ 		<node id="k8" activation="linear">
+		    <link id="g1" weight="0.0" />
+		</node>		 
+	</KohonenLayer>
+	
+	<GrossbergLayer>
+	    <node id="g1" activation="simoid"/>
+	</GrossbergLayer>
+</neuralNet>
