@@ -28,9 +28,9 @@ class Layer:
         for node in self.nodes:
             node.set_value(input_vector.get_value_for_node(node.nodeId))
             
-    def propagate(self):
+    def propagate(self, debug=False):
         for node in self.nodes:
-            node.propagate()
+            node.propagate(debug)
         self.bias.propagate()
             
     def clear_values(self):
@@ -90,6 +90,15 @@ class KohonenLayer(Layer):
     
     def column(self, index):
         return index % self.rows
+    
+    def propagate(self, debug=False):
+        maximum = None
+        for node in self.nodes:
+            if maximum is None or maximum.get_value() < node.get_value():
+                maximum = node
+        
+        maximum.propagate(debug)
+        self.bias.propagate()
 
 class GrossbergLayer(Layer):
     

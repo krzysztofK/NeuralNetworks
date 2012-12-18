@@ -195,7 +195,7 @@
 								
 	</layer>
 
-	<KohonenLayer neighbourhood="1D" conscience="true" conscience_coefficient="1.0">
+	<KohonenLayer neighbourhood="2D" rows="3" columns="3" conscience="true" conscience_coefficient="0.2">
 <!-- 	<KohonenLayer neighbourhood="2D" rows="2" columns="2">
  -->	    
 		<node id="k1" activation="linear">
@@ -260,7 +260,12 @@
 			<link id="g2" weight="0.0" />
 
 			<link id="g3" weight="0.0" />
-		</node>		 
+		</node>
+        <bias>
+            <link id="g1" weight="-0.25" />
+            <link id="g2" weight="-0.25" />
+            <link id="g3" weight="-0.25" />
+        </bias>		 
 	</KohonenLayer>
 	
 	<GrossbergLayer>

@@ -43,6 +43,7 @@ class SigmoidFunction(ActivationFunction):
     def calculate_value(self, input_value):
         return 1.0 / (1.0 + math.exp(-input_value))
     def derivative_value(self, input_value):
-        return math.exp(input_value)/(math.exp(input_value)^2)
+        #return math.exp(input_value)/(math.exp(input_value)**2.0)
+        return (input_value)*(1-input_value)
     def get_name(self):
         return 'sigmoid'

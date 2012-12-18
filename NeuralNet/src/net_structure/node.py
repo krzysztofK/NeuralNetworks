@@ -32,9 +32,9 @@ class Node:
         result = '\t-node ' + self.nodeId +'\n'
         for link in self.links :
             result = result + str(link)
-        if self.links is None or len(self.links) == 0:
-            for link in self.backward_links :
-                result = result + str(link)
+        result = result + '\n backward'
+        for link in self.backward_links :
+            result = result + str(link)
         return result
     
     def get_value(self):
@@ -49,7 +49,9 @@ class Node:
     def add_to_current_value(self, value_to_add):
         self.__value += value_to_add
         
-    def propagate(self):
+    def propagate(self, debug=False):
+        if debug:
+            print(str(self.nodeId) +":" + str(self.get_value()))
         postActivationValue = self.get_value()
         for link in self.links:
             link.to_node.add_to_current_value(postActivationValue * link.weight)

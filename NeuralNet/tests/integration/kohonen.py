@@ -22,10 +22,10 @@ class Test(unittest.TestCase):
         conscience_coefficient = 0.0
         for i in range(1, 32000):
             reducer = pow(0.5, i/8000)
-            network.learn(vector1, coefficient * reducer, conscience_coefficient * reducer)
-            network.learn(vector2, coefficient * reducer, conscience_coefficient * reducer)
-            network.learn(vector3, coefficient * reducer, conscience_coefficient * reducer)
-            network.learn(vector4, coefficient * reducer, conscience_coefficient * reducer)
+            network.learn(vector1, coefficient * reducer, conscience_coefficient * reducer,1)
+            network.learn(vector2, coefficient * reducer, conscience_coefficient * reducer,1)
+            network.learn(vector3, coefficient * reducer, conscience_coefficient * reducer,1)
+            network.learn(vector4, coefficient * reducer, conscience_coefficient * reducer,1)
             if i % 8000 == 0:
                 print(network)
                 

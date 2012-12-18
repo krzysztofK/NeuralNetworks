@@ -28,11 +28,11 @@ class NeuralNetwork :
         for layer in self.layers:
             layer.clear_values()
     
-    def calculte_answer(self, input_vector):
+    def calculte_answer(self, input_vector, debug=False):
         self.clear_values()
         self.layers[0].copy_values_from_input_vector(input_vector)
         for layer in self.layers:
-            layer.propagate()
+            layer.propagate(debug)
         network_answer = []
         for node in self.layers[-1].nodes:
             network_answer.append(node.get_value())
@@ -62,6 +62,7 @@ class NeuralNetwork :
         for i in range(1, turns):
             reducer = pow(0.5, i/coefficient_half_life) if coefficient_half_life is not None else 1.0
             grossberg_reducer = pow(0.5, i/grossberg_coefficient_half_life) if i > 2000 else 1.0
+            reducer = reducer if i < 2000 else 0.0
             for input_vector in input_vectors:
                 self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer, neighbourhoodWidth)
                 winner = self.kohonenLayer.winner
@@ -71,4 +72,8 @@ class NeuralNetwork :
                         nextNode = link.to_node
                         value = nextNode.get_value()
                         expected_value = input_vector.expected_value_dict[nextNode.nodeId]
+                        winner.normize()
+                        #nextNode.normize()
                         link.learn(value, expected_value, grossberg_coefficient * grossberg_reducer)
+                        winner.normize()
+                        #nextNode.normize()
