@@ -2,21 +2,13 @@
 <inputVector>
 
 	<node id="input1" value="0" />
-
 	<node id="input2" value="1" />
-	
 	<node id="input3" value="0" />
-	
 	<node id="input4" value="0" />
-	
 	<node id="input5" value="1" />
-	
 	<node id="input6" value="0" />
-	
 	<node id="input7" value="0" />
-	
 	<node id="input8" value="1" />
-	
 	<node id="input9" value="0" />
 
 	<result id="g1" value = "0"/>
