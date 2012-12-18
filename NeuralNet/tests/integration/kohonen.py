@@ -19,7 +19,7 @@ class Test(unittest.TestCase):
         vector3 = InputVectorParser(COMMON_DIR_PREFIX+"input3.xml").parse()
         vector4 = InputVectorParser(COMMON_DIR_PREFIX+"input4.xml").parse()
         coefficient = 0.12
-        conscience_coefficient = 1.0
+        conscience_coefficient = 0.0
         for i in range(1, 32000):
             reducer = pow(0.5, i/8000)
             network.learn(vector1, coefficient * reducer, conscience_coefficient * reducer)

@@ -11,7 +11,7 @@ from net_calculation.input_vector_factory import RandomInputVectorFactory
 if __name__ == '__main__':
     argument_parser = argparse.ArgumentParser()
     input_vector_group = argument_parser.add_mutually_exclusive_group(required=True)
-    input_vector_group.add_argument("--vector_file", help="xml file with input vector", type=open)
+    input_vector_group.add_argument("--vector_file", help="xml file with input vector", type=open, action='append')
     input_vector_group.add_argument("--vector_limits", metavar=('LOWER', 'UPPER'), help="lower and upper limit for input values", nargs=2, type=float)
     argument_parser.add_argument("--network", help="xml file with neural network", type=open, required=True)
     link_weights_group = argument_parser.add_mutually_exclusive_group()
@@ -34,10 +34,10 @@ if __name__ == '__main__':
         input_vector = RandomInputVectorFactory.create_new(args.vector_limits[0], args.vector_limits[1], network.layers[0].get_nodes_ids())
         print('Generated vector with values from range [{}; {}]:\n{}'.format(args.vector_limits[0], args.vector_limits[1], input_vector))
     else:
-        input_vector = InputVectorParser(args.vector_file).parse()
+        input_vectors = [InputVectorParser(vector).parse() for vector in args.vector_file]
     if args.learn:
-        network.learning_process([input_vector], args.coefficient, args.coefficient_half_life, args.turns)
+        network.learning_process(input_vectors, args.coefficient, args.coefficient_half_life, args.turns)
     else:
         print('Network response is:')
-        print(network.calculte_answer(input_vector))
+        print(network.calculte_answer(input_vectors[0]))
     
