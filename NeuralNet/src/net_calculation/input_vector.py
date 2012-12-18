@@ -36,7 +36,8 @@ class InputVector:
             length = length + value ** 2.0
         length = length ** 0.5
         for nodeName in self.__node_value_dict.keys() :
-            self.__node_value_dict[nodeName] = self.__node_value_dict[nodeName] / length
+            if abs(length) > 0.00000001:
+                self.__node_value_dict[nodeName] = self.__node_value_dict[nodeName] / length
             
 class LearningVector(InputVector):
     
