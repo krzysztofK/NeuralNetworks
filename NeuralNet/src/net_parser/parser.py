@@ -5,10 +5,10 @@ Created on 02-11-2012
 '''
 from xml.dom.minidom import parse
 from net_structure.node import Node, Bias, NeuronNode
-from net_structure.layer import Layer, KohonenLayer
+from net_structure.layer import Layer, KohonenLayer, GrossbergLayer
 from net_parser.exception import ParseException
 from net_structure.network import NeuralNetwork
-from net_calculation.input_vector import InputVector
+from net_calculation.input_vector import InputVector, LearningVector
 
 ROOT_NODE_NAME = 'neuralNet'
 LAYER_NODE_NAME = 'layer'
@@ -31,6 +31,9 @@ NEIGHBOURHOOD_VALUE_2D = '2D'
 CONSCIENCE_ATTRIBUTE_NAME = 'conscience'
 CONSCIENCE_COEFF_ATTRIBUTE_NAME = 'conscience_coefficient'
 
+GROSSBERG_LAYER_NODE_NAME = 'GrossbergLayer'
+RESULT_NODE_NAME = 'result'
+
 class NetParser:
     '''
     classdocs
@@ -46,7 +49,7 @@ class NetParser:
         layers = []
         rootElement = net.getElementsByTagName(ROOT_NODE_NAME)[0]
         conscience_coeff = None
-        for element in rootElement.getElementsByTagName(LAYER_NODE_NAME) + rootElement.getElementsByTagName(KOHONEN_LAYER_NODE_NAME):
+        for element in rootElement.getElementsByTagName(LAYER_NODE_NAME) + rootElement.getElementsByTagName(KOHONEN_LAYER_NODE_NAME) + rootElement.getElementsByTagName(GROSSBERG_LAYER_NODE_NAME):
             layerNodes = [NeuronNode(nodeElement.getAttribute(NODE_ID_ATTRUBUTE_NAME),\
                                      self.parseLinks(nodeElement, weightFunction),\
                                      nodeElement.getAttribute(ACTIVATION_ATTRIBUTE_NAME))\
@@ -73,6 +76,8 @@ class NetParser:
                     rows = int(element.getAttribute(ROWS_ATTRIBUTE_NAME))
                     columns = int(element.getAttribute(COLUMNS_ATTRIBUTE_NAME))
                 layers.append(KohonenLayer(layerNodes, bias, neighbourhoodType, rows, columns, conscience))
+            elif networkType == GROSSBERG_LAYER_NODE_NAME :
+                layers.append(GrossbergLayer(layerNodes, bias))                
             else :
                 layers.append(Layer(layerNodes, bias))
         for layer in layers :
@@ -100,7 +105,13 @@ class InputVectorParser:
         input_vector_xml = parse(self.input_vector_file)
         node_value_dict = {}
         for node_element in input_vector_xml.getElementsByTagName(INPUT_VECTOR_ROOT_NODE_NAME)[0].getElementsByTagName(NODE_NAME):
-            node_value_dict[node_element.getAttribute(NODE_ID_ATTRUBUTE_NAME)] = node_element.getAttribute(VALUE_ATTRIBUTE_NAME)
+            node_value_dict[node_element.getAttribute(NODE_ID_ATTRUBUTE_NAME)] = float(node_element.getAttribute(VALUE_ATTRIBUTE_NAME))
+            
+        expected_value_dict = {}
+        for node_element in input_vector_xml.getElementsByTagName(INPUT_VECTOR_ROOT_NODE_NAME)[0].getElementsByTagName(RESULT_NODE_NAME):
+            expected_value_dict[node_element.getAttribute(NODE_ID_ATTRUBUTE_NAME)] = float(node_element.getAttribute(VALUE_ATTRIBUTE_NAME))
+        if expected_value_dict :
+            return LearningVector(node_value_dict, expected_value_dict)
         return InputVector(node_value_dict) 
              
 if __name__ == "__main__":

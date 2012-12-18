@@ -76,6 +76,14 @@ class NeuronNode(Node) :
             link.weight = link.weight + coefficient * (link.from_node.get_value() - link.weight)
             
     def normize(self):
+#        weight_sum = 0.0
+#        for link in self.backward_links:
+#            weight_sum += link.weight ** 2.0
+#        weight_sum = weight_sum ** 0.5
+#        if abs(weight_sum - 0.0) > 0.00000001:
+#            for link in self.backward_links:
+#                link.weight =  link.weight / weight_sum
+
         weight_sum = 0.0
         for link in self.backward_links:
             weight_sum += link.weight

@@ -3,13 +3,21 @@ Created on 02-11-2012
 
 @author: Krzysztof
 '''
+from net_structure.layer import KohonenLayer, GrossbergLayer
 
 class NeuralNetwork :
     
     def __init__(self, layers, conscienceCoefficient=None):
         self.layers = layers
         self.conscienceCoefficient = conscienceCoefficient if conscienceCoefficient is not None else 0.0
-    
+        self.kohonenLayer = None
+        self.grossbergLayer = None
+        for layer in layers :
+            if isinstance(layer, KohonenLayer) :
+                self.kohonenLayer = layer
+            elif isinstance(layer, GrossbergLayer) :
+                self.grossbergLayer = layer
+        
     def __str__(self):
         result = ''
         for layer in self.layers :
@@ -30,21 +38,37 @@ class NeuralNetwork :
             network_answer.append(node.get_value())
         return network_answer
     
-    def learn(self, input_vector, coefficient, conscienceCoefficient):
+    def learn(self, input_vector, coefficient, conscienceCoefficient, neighbourhoodWidth):
         #TODO:
         #Find a better way to store normalized weights vector
-        for node in self.layers[-1].nodes:
+        for node in self.kohonenLayer.nodes:
             node.normize()
         result = self.calculte_answer(input_vector)
-        self.layers[-1].learn(coefficient, conscienceCoefficient)
-        for node in self.layers[-1].nodes:
+        self.kohonenLayer.learn(coefficient, conscienceCoefficient, neighbourhoodWidth)
+        for node in self.kohonenLayer.nodes:
             node.normize()
         return result
         
-    def learning_process(self, input_vectors, coefficient, coefficient_half_life, turns):
+    def learning_process(self, input_vectors, coefficient, coefficient_half_life, turns, neighbourhoodWidth):
         for i in range(1, turns):
             reducer = pow(0.5, i/coefficient_half_life) if coefficient_half_life is not None else 1.0
             for input_vector in input_vectors:
-                self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer)
+                self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer, neighbourhoodWidth)
         print(self)
-    
+
+    def cp_learning_process(self, input_vectors, coefficient, coefficient_half_life, turns, neighbourhoodWidth, grossberg_coefficient, grossberg_coefficient_half_life):
+        for input_vector in input_vectors :
+            input_vector.normize()
+        for i in range(1, turns):
+            reducer = pow(0.5, i/coefficient_half_life) if coefficient_half_life is not None else 1.0
+            grossberg_reducer = pow(0.5, i/grossberg_coefficient_half_life) if i > 2000 else 1.0
+            for input_vector in input_vectors:
+                self.learn(input_vector, coefficient * reducer, self.conscienceCoefficient * reducer, neighbourhoodWidth)
+                winner = self.kohonenLayer.winner
+                #self.calculte_answer(input_vector)
+                if winner is not None :
+                    for link in winner.links :
+                        nextNode = link.to_node
+                        value = nextNode.get_value()
+                        expected_value = input_vector.expected_value_dict[nextNode.nodeId]
+                        link.learn(value, expected_value, grossberg_coefficient * grossberg_reducer)

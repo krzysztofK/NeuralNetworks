@@ -61,7 +61,7 @@ class KohonenLayer(Layer):
     def __str__(self):
         return Layer.__str__(self) + '- dimension - ' + str(self.rows) + ' x ' + str(self.columns)
     
-    def learn(self, coefficient, conscienceCoefficient):
+    def learn(self, coefficient, conscienceCoefficient, neighbourhoodWidth):
         maximum = None
         for node in self.nodes:
             current_value = node.get_value() + conscienceCoefficient * (1.0 - float(self.nodesCount) * self.winFrequencies[node])
@@ -78,9 +78,10 @@ class KohonenLayer(Layer):
             winnerIndex = self.nodes.index(maximum[1])
             for nodeIndex in range(len(self.nodes)) :
                 if winnerIndex != nodeIndex :
-                    self.nodes[nodeIndex].learn(coefficient * self.neighbourhoodFunction.calculate(self.distance(nodeIndex, winnerIndex)))
+                    self.nodes[nodeIndex].learn(coefficient * self.neighbourhoodFunction.calculate(self.distance(nodeIndex, winnerIndex), neighbourhoodWidth))
         maximum[1].learn(coefficient)
-    
+        self.winner = maximum[1]
+        
     def distance(self, nodeIndex, winnerIndex):
         return abs(self.row(nodeIndex) - self.row(winnerIndex)) + abs(self.column(nodeIndex) - self.column(winnerIndex))
         
@@ -89,4 +90,8 @@ class KohonenLayer(Layer):
     
     def column(self, index):
         return index % self.rows
+
+class GrossbergLayer(Layer):
     
+    def __init__(self, nodes, bias):
+        Layer.__init__(self, nodes, bias)

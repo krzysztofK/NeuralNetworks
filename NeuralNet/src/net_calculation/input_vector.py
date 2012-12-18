@@ -24,8 +24,22 @@ class InputVector:
     def printVector(self, columnSize):
         count = 0
         for node in sorted(self.__node_value_dict.keys()) :
-            print(self.get_value_for_node(node), end='')
+            print(int(self.get_value_for_node(node)), end='')
             count = count + 1
             if count == columnSize :
                 count = 0
                 print('')
+
+    def normize(self):
+        length = 0.0
+        for value in self.__node_value_dict.values() :
+            length = length + value ** 2.0
+        length = length ** 0.5
+        for nodeName in self.__node_value_dict.keys() :
+            self.__node_value_dict[nodeName] = self.__node_value_dict[nodeName] / length
+            
+class LearningVector(InputVector):
+    
+    def __init__(self, node_value_dict, expected_value_dict):
+        InputVector.__init__(self, node_value_dict)
+        self.expected_value_dict = expected_value_dict
