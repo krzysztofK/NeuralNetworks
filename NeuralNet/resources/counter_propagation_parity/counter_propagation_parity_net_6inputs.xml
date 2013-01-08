@@ -16,9 +16,6 @@
 
 			<link id="k6" weight="0.0" />
 
-			<link id="k7" weight="0.0" />
-
-			<link id="k8" weight="0.0" />
 		</node>
 
 		<node id="input2">
@@ -34,11 +31,6 @@
 			<link id="k5" weight="0.0" />
 
 			<link id="k6" weight="0.0" />
-
-			<link id="k7" weight="0.0" />
-
-			<link id="k8" weight="0.0" />
-						
 		</node>
 
 		<node id="input3">
@@ -54,11 +46,6 @@
 			<link id="k5" weight="0.0" />
 
 			<link id="k6" weight="0.0" />
-
-			<link id="k7" weight="0.0" />
-
-			<link id="k8" weight="0.0" />
-			
 		</node>
 		
 	</layer>
@@ -82,12 +69,6 @@
 		    <link id="g1" weight="0.0" />
 		</node>		 
  		<node id="k6" activation="linear">
-		    <link id="g1" weight="0.0" />
-		</node>		 
- 		<node id="k7" activation="linear">
-		    <link id="g1" weight="0.0" />
-		</node>		 
- 		<node id="k8" activation="linear">
 		    <link id="g1" weight="0.0" />
 		</node>		 
 	</KohonenLayer>
