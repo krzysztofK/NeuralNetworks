@@ -29,3 +29,6 @@ class Link:
         
     def delta_learn(self, value, expected_value, coefficient, activation_function, k = 1.0):
         self.weight = self.weight + coefficient * (expected_value - value) * k * activation_function.derivative_value(value)
+    
+    def bp_learn(self, speed, delta):
+        self.weight = self.weight + speed * self.from_node.get_value()

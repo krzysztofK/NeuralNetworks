@@ -77,3 +77,17 @@ class NeuralNetwork :
                         link.learn(value, expected_value, grossberg_coefficient * grossberg_reducer)
                         winner.normize()
                         #nextNode.normize()
+
+    def bp_learning_process(self, input_vectors, speed, momentum, stepsCount):
+        for _ in range(stepsCount):
+            for input_vector in input_vectors :
+                self.calculte_answer(input_vector)
+                for node in self.layers[-1].nodes :
+                    node.bp_learn_output_node(input_vector.expected_value_dict[node.nodeId], speed)
+                
+                hiddenLayers = self.layers[1:-1]
+                hiddenLayers.reverse()
+                for layer in hiddenLayers :
+                    for node in layer.nodes :
+                        node.bp_learn_hidden_node(speed)
+                        
