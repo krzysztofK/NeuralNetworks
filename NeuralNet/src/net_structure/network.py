@@ -78,15 +78,15 @@ class NeuralNetwork :
                         winner.normize()
                         #nextNode.normize()                
 
-    def backpropagation_learn(self, input_vectors, learning_rate, iterations):
-        for i in range(iterations):
+    def backpropagation_learn(self, input_vectors, learning_rate, iterations, momentum):
+        for _ in range(iterations):
             for input_vector in input_vectors:
                 self.calculte_answer(input_vector)
                 for node in self.layers[-1].nodes :
-                    node.bp_learn_output_node(input_vector.expected_value_dict[node.nodeId], learning_rate)
+                    node.bp_learn_output_node(input_vector.expected_value_dict[node.nodeId], learning_rate, momentum)
                 
                 hiddenLayers = self.layers[1:-1]
                 hiddenLayers.reverse()
                 for layer in hiddenLayers :
                     for node in layer.nodes :
-                        node.bp_learn_hidden_node(learning_rate)
+                        node.bp_learn_hidden_node(learning_rate, momentum)

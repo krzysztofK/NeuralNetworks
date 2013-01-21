@@ -96,14 +96,14 @@ class NeuronNode(Node) :
             for link in self.backward_links:
                 link.weight =  link.weight / weight_sum
     
-    def bp_learn_output_node(self, expected_value, speed):
+    def bp_learn_output_node(self, expected_value, speed, momentum):
         self.delta = self.get_psp_derivative() * (expected_value - self.get_value())
-        self.bp_learn(speed, self.delta)
+        self.bp_learn(speed, self.delta, momentum)
         
-    def bp_learn_hidden_node(self, speed):
+    def bp_learn_hidden_node(self, speed, momentum):
         self.delta = self.get_psp_derivative() * sum([ link.weight * link.to_node.delta for link in self.links])
-        self.bp_learn(speed, self.delta)
+        self.bp_learn(speed, self.delta, momentum)
 
-    def bp_learn(self, speed, delta):
+    def bp_learn(self, speed, delta, momentum):
         for link in self.backward_links :
-            link.bp_learn(speed, self.delta)
+            link.bp_learn(speed, self.delta, momentum)
