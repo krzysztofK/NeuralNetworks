@@ -20,17 +20,16 @@ class Test(unittest.TestCase):
         #testVectors = [InputVectorParser(COMMON_DIR_PREFIX + TEST_VECTOR_FILE_PREFIX + str(i) + '.xml').parse() for i in range(1, 4)]
         network = NetParser(COMMON_DIR_PREFIX + NETWORK_FILE).parse(lambda : random.uniform(-1.0, 1.0))
         learning_rate = 0.04
-        iterations = 500
+        iterations = 5
         network.backpropagation_learn(input_vectors, learning_rate, iterations)
         print(network)
-        input_vectors = [InputVectorParser(COMMON_DIR_PREFIX + LEARNING_VECTOR_FILE_PREFIX + str(i) + '.xml').parse() for i in range(1, 10)]
         for inputVector in input_vectors :
-            self.printResult(network, inputVector)
+            self.print_results(network, inputVector)
 
 #        print('---------------------------------------------------------------------')
 #        
 #        for testVector in testVectors :
-#            self.printResult(network, testVector)
+#            self.print_results(network, testVector)
             
     def print_results(self, network, vector):
         vector.printVector(3)
