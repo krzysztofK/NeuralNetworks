@@ -14,6 +14,7 @@ class Link:
         self.weight = weight
         self.from_node = from_node
         self.to_node = to_node
+        self.weightsDelta = 0.0
 
     def __str__(self):
         return '\t\t-link(' + str(self.weight) + ') from ' + self.from_node.nodeId + ' to ' + self.to_node.nodeId + '\n' 
@@ -30,5 +31,7 @@ class Link:
     def delta_learn(self, value, expected_value, coefficient, activation_function, k = 1.0):
         self.weight = self.weight + coefficient * (expected_value - value) * k * activation_function.derivative_value(value)
     
-    def bp_learn(self, speed, delta):
-        self.weight = self.weight + speed * self.from_node.get_value() * delta
+    def bp_learn(self, speed, delta, momentum):
+        newWeight = self.weight + speed * self.from_node.get_value() * delta + momentum * self.weightsDelta
+        self.weightsDelta = newWeight - self.weight
+        self.weight = newWeight
