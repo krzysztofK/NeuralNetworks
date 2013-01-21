@@ -32,6 +32,6 @@ class Link:
         self.weight = self.weight + coefficient * (expected_value - value) * k * activation_function.derivative_value(value)
     
     def bp_learn(self, speed, delta, momentum):
-        newWeight = self.weight + speed * self.from_node.get_value() * delta + momentum * self.weightsDelta
-        self.weightsDelta = newWeight - self.weight
-        self.weight = newWeight
+        change = self.from_node.get_value() * delta
+        self.weight = self.weight + speed * change + momentum * self.weightsDelta
+        self.weightsDelta = change

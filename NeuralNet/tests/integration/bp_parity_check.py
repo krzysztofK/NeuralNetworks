@@ -1,4 +1,5 @@
 import unittest
+import random
 from net_parser.parser import InputVectorParser, NetParser
 
 COMMON_DIR_PREFIX = '../../resources/back_propagation/'
@@ -12,10 +13,10 @@ class Test(unittest.TestCase):
 
     def executeTest(self, indexRange, networkFile):
         inputVectors = [InputVectorParser(COMMON_DIR_PREFIX + LEARNING_VECTOR_FILE_PREFIX + str(i) + '.xml').parse() for i in indexRange]
-        network = NetParser(COMMON_DIR_PREFIX + networkFile).parse()
+        network = NetParser(COMMON_DIR_PREFIX + networkFile).parse(lambda : random.uniform(-1.0, 1.0))
         speed = 0.2
         momentum = 0.5
-        iterations = 5000
+        iterations = 1000
 
         network.backpropagation_learn(inputVectors, speed, iterations, momentum)
 

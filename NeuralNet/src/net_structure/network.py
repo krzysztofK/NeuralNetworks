@@ -81,7 +81,10 @@ class NeuralNetwork :
     def backpropagation_learn(self, input_vectors, learning_rate, iterations, momentum):
         for _ in range(iterations):
             for input_vector in input_vectors:
+                #Calculate network output
                 self.calculte_answer(input_vector)
+                
+                #Calculate error and propagate it backwards
                 for node in self.layers[-1].nodes :
                     node.bp_learn_output_node(input_vector.expected_value_dict[node.nodeId], learning_rate, momentum)
                 
@@ -90,3 +93,10 @@ class NeuralNetwork :
                 for layer in hiddenLayers :
                     for node in layer.nodes :
                         node.bp_learn_hidden_node(learning_rate, momentum)
+                        
+                #Update network weights
+                layers = self.layers[1:]
+                layers.reverse()
+                for layer in layers:
+                    for node in layer.nodes:
+                        node.bp_learn(learning_rate, momentum)

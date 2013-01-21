@@ -1,0 +1,144 @@
+<neuralNet>
+	<layer>
+
+		<node id="input1">
+			<link id="h1" weight="0.0" />
+			<link id="h2" weight="0.0" />
+			<link id="h3" weight="0.0" />
+			<link id="h4" weight="0.0" />
+			<link id="h5" weight="0.0" />
+			<link id="h6" weight="0.0" />
+			<link id="h7" weight="0.0" />
+			<link id="h8" weight="0.0" />
+			<link id="h9" weight="0.0" />
+			<link id="h10" weight="0.0" />
+			<link id="h11" weight="0.0" />
+			<link id="h12" weight="0.0" />
+			<link id="h13" weight="0.0" />
+			<link id="h14" weight="0.0" />
+			<link id="h15" weight="0.0" />
+			<link id="h16" weight="0.0" />
+			<link id="h17" weight="0.0" />
+			<link id="h18" weight="0.0" />
+			<link id="h19" weight="0.0" />
+			<link id="h20" weight="0.0" />
+		</node>
+
+		<node id="input2">
+			<link id="h1" weight="0.0" />
+			<link id="h2" weight="0.0" />
+			<link id="h3" weight="0.0" />
+			<link id="h4" weight="0.0" />
+			<link id="h5" weight="0.0" />
+			<link id="h6" weight="0.0" />
+			<link id="h7" weight="0.0" />
+			<link id="h8" weight="0.0" />
+			<link id="h9" weight="0.0" />
+			<link id="h10" weight="0.0" />
+			<link id="h11" weight="0.0" />
+			<link id="h12" weight="0.0" />
+			<link id="h13" weight="0.0" />
+			<link id="h14" weight="0.0" />
+			<link id="h15" weight="0.0" />
+			<link id="h16" weight="0.0" />
+			<link id="h17" weight="0.0" />
+			<link id="h18" weight="0.0" />
+			<link id="h19" weight="0.0" />
+			<link id="h20" weight="0.0" />
+		</node>
+
+		<node id="input3">
+			<link id="h1" weight="0.0" />
+			<link id="h2" weight="0.0" />
+			<link id="h3" weight="0.0" />
+			<link id="h4" weight="0.0" />
+			<link id="h5" weight="0.0" />
+			<link id="h6" weight="0.0" />
+			<link id="h7" weight="0.0" />
+			<link id="h8" weight="0.0" />
+			<link id="h9" weight="0.0" />
+			<link id="h10" weight="0.0" />
+			<link id="h11" weight="0.0" />
+			<link id="h12" weight="0.0" />
+			<link id="h13" weight="0.0" />
+			<link id="h14" weight="0.0" />
+			<link id="h15" weight="0.0" />
+			<link id="h16" weight="0.0" />
+			<link id="h17" weight="0.0" />
+			<link id="h18" weight="0.0" />
+			<link id="h19" weight="0.0" />
+			<link id="h20" weight="0.0" />
+		</node>
+
+	</layer>
+
+	<layer>
+		<bias>
+			<link id="o1" weight="0.0" />
+		</bias>	
+		<node id="h1" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h2" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h3" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h4" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h5" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h6" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h7" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h8" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h9" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h10" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h11" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h12" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h13" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h14" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h15" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h16" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h17" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h18" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h19" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+		<node id="h20" activation="linear">
+			<link id="o1" weight="0.0" />
+		</node>
+	</layer>
+
+	<layer>
+		<node id="o1" activation="linear" />
+	</layer>
+</neuralNet>
