@@ -59,8 +59,8 @@
 	</layer>
 	
 	<layer>
-	    <node id="output1" activation="linear"/>
-	    <node id="output2" activation="linear"/>
-	    <node id="output3" activation="linear"/>
+	    <node id="output1" activation="sigmoid"/>
+	    <node id="output2" activation="sigmoid"/>
+	    <node id="output3" activation="sigmoid"/>
 	</layer>
 </neuralNet>
