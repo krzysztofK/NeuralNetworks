@@ -16,7 +16,7 @@ class Test(unittest.TestCase):
         network = NetParser(COMMON_DIR_PREFIX + networkFile).parse(lambda : random.uniform(-1.0, 1.0))
         speed = 0.2
         momentum = 0.5
-        iterations = 1000
+        iterations = 5000
 
         network.backpropagation_learn(inputVectors, speed, iterations, momentum)
 
