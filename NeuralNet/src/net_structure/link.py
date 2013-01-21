@@ -19,7 +19,7 @@ class Link:
     def __str__(self):
         return '\t\t-link(' + str(self.weight) + ') from ' + self.from_node.nodeId + ' to ' + self.to_node.nodeId + '\n' 
     
-    def learn(self, value, expected_value, coefficient, k = 1.0):
+    def learn(self, expected_value, coefficient, k = 1.0):
         psp_value = self.to_node.get_value()
         if self.to_node.activationFunction.get_name() == 'sigmoid':
             self.delta_learn(psp_value, expected_value, coefficient, self.to_node.activationFunction, k = 1.0)
