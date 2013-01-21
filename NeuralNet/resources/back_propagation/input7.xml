@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputVector>
+
+	<node id="input1" value="0" />
+	<node id="input2" value="0" />
+	<node id="input3" value="1" />
+
+	<result id="o1" value = "1.0"/>
+		
+</inputVector>

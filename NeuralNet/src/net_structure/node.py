@@ -73,6 +73,9 @@ class NeuronNode(Node) :
     def get_value(self):
         return self.activationFunction.calculate_value(super(NeuronNode, self).get_value())
     
+    def get_psp_derivative(self):
+        return self.activationFunction.derivative_value(super(NeuronNode, self).get_value())
+    
     def learn(self, coefficient):
         for link in self.backward_links:
             link.weight = link.weight + coefficient * (link.from_node.get_value() - link.weight)
@@ -92,4 +95,15 @@ class NeuronNode(Node) :
         if abs(weight_sum - 0.0) > 0.00000001:
             for link in self.backward_links:
                 link.weight =  link.weight / weight_sum
-            
+    
+    def bp_learn_output_node(self, expected_value, speed):
+        self.delta = self.get_psp_derivative() * (expected_value - self.get_value())
+        self.bp_learn(speed, self.delta)
+        
+    def bp_learn_hidden_node(self, speed):
+        self.delta = self.get_psp_derivative() * sum([ link.weight * link.to_node.delta for link in self.links])
+        self.bp_learn(speed, self.delta)
+
+    def bp_learn(self, speed, delta):
+        for link in self.backward_links :
+            link.bp_learn(speed, self.delta)

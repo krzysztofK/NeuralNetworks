@@ -77,10 +77,7 @@ class NeuralNetwork :
                         link.learn(value, expected_value, grossberg_coefficient * grossberg_reducer)
                         winner.normize()
                         #nextNode.normize()
-    
-    def backpropagate(self):
-        pass
-                       
+
     def backpropagation_learn(self, input_vectors, learning_rate, iterations):
         for i in range(iterations):
             error = 0.0
