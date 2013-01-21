@@ -13,11 +13,11 @@ class Test(unittest.TestCase):
     def executeTest(self, indexRange, networkFile):
         inputVectors = [InputVectorParser(COMMON_DIR_PREFIX + LEARNING_VECTOR_FILE_PREFIX + str(i) + '.xml').parse() for i in indexRange]
         network = NetParser(COMMON_DIR_PREFIX + networkFile).parse()
-        speed = 0.5
+        speed = 0.2
         momentum = 0.2
-        turns = 5000
+        iterations = 5000
 
-        network.bp_learning_process(inputVectors, speed, momentum, turns)
+        network.backpropagation_learn(inputVectors, speed, iterations)
 
         inputVectors = [InputVectorParser(COMMON_DIR_PREFIX + LEARNING_VECTOR_FILE_PREFIX + str(i) + '.xml').parse() for i in range(1, 9)]
         for inputVector in inputVectors :
