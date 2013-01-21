@@ -70,11 +70,10 @@ class NeuralNetwork :
                 if winner is not None :
                     for link in winner.links :
                         nextNode = link.to_node
-                        value = nextNode.get_value()
                         expected_value = input_vector.expected_value_dict[nextNode.nodeId]
                         winner.normize()
                         #nextNode.normize()
-                        link.learn(value, expected_value, grossberg_coefficient * grossberg_reducer)
+                        link.learn(expected_value, grossberg_coefficient * grossberg_reducer)
                         winner.normize()
                         #nextNode.normize()                
 

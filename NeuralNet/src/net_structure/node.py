@@ -40,6 +40,9 @@ class Node:
     def get_value(self):
         return self.__value
     
+    def get_pre_psp_value(self):
+        return self.__value
+    
     def set_value(self, value):
         self.__value = float(value)
     
