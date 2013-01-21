@@ -73,6 +73,9 @@
 	</layer>
 
 	<layer>
+		<bias>
+			<link id="o1" weight="0.0" />
+		</bias>	
 		<node id="h1" activation="linear">
 			<link id="o1" weight="0.0" />
 		</node>
