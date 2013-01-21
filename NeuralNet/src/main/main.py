@@ -20,7 +20,8 @@ if __name__ == '__main__':
     argument_parser.add_argument('--coefficient', help="learning coefficient(alpha)", type=float)
     argument_parser.add_argument('--coefficient_half_life', help="turns after coefficient is reduced by half", type=int)
     argument_parser.add_argument('--turns', help="how many turns learning will take", type=int)
-    argument_parser.add_argument('--learn', action="store_true")
+    argument_parser.add_argument('--kohonen', action="store_true")
+    argument_parser.add_argument('--backpropagation', action="store_true")
     args = argument_parser.parse_args()
     weight_function = None
     if args.random:
@@ -35,8 +36,10 @@ if __name__ == '__main__':
         print('Generated vector with values from range [{}; {}]:\n{}'.format(args.vector_limits[0], args.vector_limits[1], input_vector))
     else:
         input_vectors = [InputVectorParser(vector).parse() for vector in args.vector_file]
-    if args.learn:
+    if args.kohonen:
         network.learning_process(input_vectors, args.coefficient, args.coefficient_half_life, args.turns)
+    if args.backpropagation:
+        network.backpropagation_learn(input_vectors, args.coefficient, args.turns)
     else:
         print('Network response is:')
         print(network.calculte_answer(input_vectors[0]))

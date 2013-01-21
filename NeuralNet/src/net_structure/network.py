@@ -91,3 +91,8 @@ class NeuralNetwork :
                     for node in layer.nodes :
                         node.bp_learn_hidden_node(speed)
                         
+    def backpropagation_learn(self, input_vectors, learning_rate, iterations):
+        for i in range(iterations):
+            for input_vector in input_vectors:
+                self.calculte_answer(input_vector)
+                self.backpropagate()
