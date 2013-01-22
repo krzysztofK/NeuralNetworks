@@ -33,6 +33,10 @@ class Link:
         self.weight = self.weight + coefficient * (expected_value - value) * k * activation_function.derivative_value(self.to_node.get_pre_psp_value())
     
     def bp_learn(self, speed, delta, momentum):
-        change = self.from_node.get_value() * delta
-        self.weight = self.weight + speed * change + momentum * self.weightsDelta
-        self.weightsDelta = change
+        newValue = self.weight + speed *  self.from_node.get_value() * delta + momentum * self.weightsDelta
+        self.weightsDelta = newValue - self.weight
+        self.weight = newValue
+
+#        change = self.from_node.get_value() * delta
+#        self.weight = self.weight + speed * change + momentum * self.weightsDelta
+#        self.weightsDelta = change
