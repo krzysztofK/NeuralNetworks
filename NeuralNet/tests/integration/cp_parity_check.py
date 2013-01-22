@@ -30,14 +30,13 @@ class Test(unittest.TestCase):
         vector.printVector(3)
         vector.normize()
         print(network.calculte_answer(vector))
-
 #    def testCP(self):
 #        self.executeTest(range(1,9), NETWORK_FILE)
     
     def testCPGenerlization(self):
         indexRange = list(range(1, 9))
-        indexRange.remove(2)
-        indexRange.remove(5)
+        indexRange.remove(1)
+        indexRange.remove(8)
         print(indexRange)
         self.executeTest(indexRange, NETWORK_FILE_WITH_6INPUTS)
         
