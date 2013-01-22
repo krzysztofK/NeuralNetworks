@@ -5,7 +5,7 @@ Created on 21-01-2013
 '''
 import unittest
 import random
-from net_parser.parser import InputVectorParser, NetParser
+from net_parser.parser import InputVectorParser, InputVector, NetParser
 
 COMMON_DIR_PREFIX = '../../resources/backpropagation_xor/'
 LEARNING_VECTOR_FILE_PREFIX = 'input'
@@ -33,6 +33,7 @@ class Test(unittest.TestCase):
             for id, val in outputDict:
                 error = error + 0.5*(inputVector.expected_value_dict[id]-val)**2
         print(error)
+        print(network.calculte_answer(InputVector({'input1' : 0.5, 'input2' : 0.5})))
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']
