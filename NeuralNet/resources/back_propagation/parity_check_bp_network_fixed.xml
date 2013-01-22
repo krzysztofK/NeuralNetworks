@@ -1,6 +1,29 @@
 <neuralNet>
 	<layer>
 
+	    <bias>
+			<link id="h1" weight="0.0" />
+			<link id="h2" weight="0.0" />
+			<link id="h3" weight="0.0" />
+			<link id="h4" weight="0.0" />
+			<link id="h5" weight="0.0" />
+			<link id="h6" weight="0.0" />
+			<link id="h7" weight="0.0" />
+			<link id="h8" weight="0.0" />
+			<link id="h9" weight="0.0" />
+			<link id="h10" weight="0.0" />
+			<link id="h11" weight="0.0" />
+			<link id="h12" weight="0.0" />
+			<link id="h13" weight="0.0" />
+			<link id="h14" weight="0.0" />
+			<link id="h15" weight="0.0" />
+			<link id="h16" weight="0.0" />
+			<link id="h17" weight="0.0" />
+			<link id="h18" weight="0.0" />
+			<link id="h19" weight="0.0" />
+			<link id="h20" weight="0.0" />
+		</bias>
+	    
 		<node id="input1">
 			<link id="h1" weight="0.0" />
 			<link id="h2" weight="0.0" />
