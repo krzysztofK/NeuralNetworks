@@ -1,0 +1,72 @@
+<neuralNet>
+
+	<layer>
+
+        <bias>
+            <link id="output1" weight="0.0" />
+            <link id="output2" weight="0.0" />
+            <link id="output3" weight="0.0" />
+        </bias> 
+
+		<node id="input1">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />
+		</node>
+
+		<node id="input2">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />			
+		</node>
+
+		<node id="input3">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />
+		</node>
+		
+		<node id="input4">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />
+		</node>
+
+		<node id="input5">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />
+		</node>
+
+		<node id="input6">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />
+		</node>
+
+		<node id="input7">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />
+		</node>
+		
+		<node id="input8">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />
+		</node>
+
+		<node id="input9">
+			<link id="output1" weight="0.0" />
+			<link id="output2" weight="0.0" />
+			<link id="output3" weight="0.0" />
+		</node>
+								
+	</layer>
+	
+	<layer>
+	    <node id="output1" activation="sigmoid"/>
+	    <node id="output2" activation="sigmoid"/>
+	    <node id="output3" activation="sigmoid"/>
+	</layer>
+</neuralNet>

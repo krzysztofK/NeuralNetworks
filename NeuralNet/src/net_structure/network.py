@@ -28,7 +28,7 @@ class NeuralNetwork :
         for layer in self.layers:
             layer.clear_values()
     
-    def calculte_answer(self, input_vector, debug=False):
+    def calculte_answer(self, input_vector, debug=False, outputList=None):
         self.clear_values()
         self.layers[0].copy_values_from_input_vector(input_vector)
         for layer in self.layers:
@@ -36,6 +36,9 @@ class NeuralNetwork :
         network_answer = []
         for node in self.layers[-1].nodes:
             network_answer.append(node.get_value())
+        if outputList is not None:
+            for node in self.layers[-1].nodes:
+                outputList.append((node.nodeId, node.get_value()))
         return network_answer
     
     def learn(self, input_vector, coefficient, conscienceCoefficient, neighbourhoodWidth):
